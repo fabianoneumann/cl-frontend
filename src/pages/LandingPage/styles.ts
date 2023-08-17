@@ -10,28 +10,25 @@ export const LandingPageContent = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 1;
 `;
 
-interface SectionProps {
-    index: number;
-}
-
-export const LandingPageSectionContainer = styled.section<SectionProps>`
+export const LandingPageSectionContainer = styled.section<{$index: number; }>`
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     padding: 10rem 2rem;
     
-    background: ${({ index }) =>
-        index % 2 === 0
+    background: ${props => 
+        props.$index % 2 === 0
             ? props => props.theme['gray-900']
             : `linear-gradient(to right, #121214, #09090a)`
     };
-    border-bottom: ${({ index, theme }) =>
-        index % 2 === 0
+    border-bottom: ${props =>
+        props.$index % 2 === 0
             ? `none`
-            : `1px solid ${theme['gray-700']}`
+            : `1px solid ${props.theme['gray-700']}`
     };
 `;
 
@@ -181,6 +178,7 @@ export const LandingPageSectionWhyCLItem = styled.div`
     h3 {
         font-size: 1.54rem;
         font-weight: bold;
+        text-align: center;
     }
 
     p {

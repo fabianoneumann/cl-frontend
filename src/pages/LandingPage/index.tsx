@@ -1,4 +1,4 @@
-//import React from "react";
+import React from "react";
 import { 
     LandingPageContainer, 
     LandingPageContent, 
@@ -83,7 +83,7 @@ export function LandingPage() {
         <LandingPageContainer>
             <LandingPageContent>
 
-                <LandingPageSectionContainer index={0}>
+                <LandingPageSectionContainer $index={0}>
                     <LandingPageTyperContainer>
                         <h3>
                             Seja bem vindo(a) ao mundo
@@ -119,7 +119,7 @@ export function LandingPage() {
                     </LandingPageSectionParagraph>
                 </LandingPageSectionContainer>
                 
-                <LandingPageSectionContainer  index={1}>
+                <LandingPageSectionContainer  $index={1}>
                     <LandingPageSectionSubtitle>
                         Somos um ambiente de <span>EDUCAÇÃO ATIVA</span> para o <span>MERCADO CRIPTO</span>
                     </LandingPageSectionSubtitle>
@@ -151,7 +151,7 @@ export function LandingPage() {
                     </LandingPageSectionActiveEducationContent>
                 </LandingPageSectionContainer>
 
-                <LandingPageSectionContainer index={2}>
+                <LandingPageSectionContainer $index={2}>
                     <LandingPageSectionSubtitle>
                         Por que escolher a Comunidade <span>Cripto Lucrativo?</span>
                     </LandingPageSectionSubtitle>
@@ -222,7 +222,7 @@ export function LandingPage() {
                     </LandingPageSectionWhyCLContent>
                 </LandingPageSectionContainer >
 
-                <LandingPageSectionContainer index={3}>
+                <LandingPageSectionContainer $index={3}>
                     <LandingPageSectionSpacedBetweenContent>
                         <LandingPageSectionSubtitle>
                             Números do <span>CL</span>
@@ -244,7 +244,7 @@ export function LandingPage() {
                     </LandingPageSectionNumbersContent>
                 </LandingPageSectionContainer>
 
-                <LandingPageSectionContainer index={4}>
+                <LandingPageSectionContainer $index={4}>
                     <LandingPageSectionSubtitle>
                         Desenvolva novas <span>habilidades</span>
                     </LandingPageSectionSubtitle>
@@ -256,7 +256,7 @@ export function LandingPage() {
                     </LandingPageSectionParagraph>	
                 </LandingPageSectionContainer>
 
-                <LandingPageSectionContainer index={5}>
+                <LandingPageSectionContainer $index={5}>
                     <LandingPageSectionSubtitle>
                         Resultados
                     </LandingPageSectionSubtitle>
@@ -279,7 +279,7 @@ export function LandingPage() {
                     </LandingPageSectionResultsContent>
                 </LandingPageSectionContainer>
 
-                <LandingPageSectionContainer index={6}>
+                <LandingPageSectionContainer $index={6}>
                     <LandingPageSectionSubtitle>
                         Para quem é a Comunidade <span>Cripto Lucrativo</span>
                     </LandingPageSectionSubtitle>
@@ -294,7 +294,7 @@ export function LandingPage() {
                     </LandingPageSectionWhoForList>
                 </LandingPageSectionContainer>
 
-                <LandingPageSectionContainer index={7}>
+                <LandingPageSectionContainer $index={7}>
                     <LandingPageSectionSafeAreaContent>
                         <LandingPageSectionSafeAreaItem>
                             <ShieldCheck size={64} weight="duotone" />
@@ -320,7 +320,7 @@ export function LandingPage() {
                     </LandingPageSectionSafeAreaContent>
                 </LandingPageSectionContainer>
 
-                <LandingPageSectionContainer index={8}>
+                <LandingPageSectionContainer $index={8}>
                     <LandingPageSectionSubtitle>
                         Depoimentos
                     </LandingPageSectionSubtitle>
@@ -332,7 +332,7 @@ export function LandingPage() {
                     </LandingPageSectionParagraph>
                 </LandingPageSectionContainer>
 
-                <LandingPageSectionContainer index={9}>
+                <LandingPageSectionContainer $index={9}>
                     <LandingPageSectionSubtitle>
                         CALL to Action com:
                     </LandingPageSectionSubtitle>
@@ -342,7 +342,7 @@ export function LandingPage() {
                 </LandingPageSectionParagraph>
                 </LandingPageSectionContainer>
 
-                <LandingPageSectionContainer index={10}>
+                <LandingPageSectionContainer $index={10}>
                     <LandingPageSectionSubtitle>
                         Perguntas <span>Frequêntes</span>
                     </LandingPageSectionSubtitle>
@@ -351,7 +351,7 @@ export function LandingPage() {
                     </LandingPageSectionParagraph>
                 </LandingPageSectionContainer>
 
-                <LandingPageSectionContainer index={11}>
+                <LandingPageSectionContainer $index={11}>
                     <LandingPageSectionSubtitle>
                         "A <span>INDEPENDÊNCIA</span> e a <span>LIBERDADE FINANCEIRA</span> podem estar mais próximas
                         da sua <span>REALIDADE</span> do que você imagina."

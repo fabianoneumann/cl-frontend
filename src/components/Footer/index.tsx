@@ -1,4 +1,4 @@
-import { FooterColumn, FooterContainer, FooterContent } from "./styles";
+import { FooterColumn, FooterContainer, FooterContent, FooterLinksContainer } from "./styles";
 import { NavLink } from "react-router-dom";
 
 import logoCL from "../../assets/images/logo-cl.png";
@@ -16,7 +16,7 @@ export function Footer() {
                     <p>Todos os direitos reservados</p>
                     <p>Developed by: Fabiano B. Neumann</p>
                 </FooterColumn>
-                <div style={{display: 'flex', gap: '5rem'}}>
+                <FooterLinksContainer>
                     <FooterColumn>
                         <span>Projetos:</span>
                         <nav>
@@ -33,9 +33,7 @@ export function Footer() {
                         <nav>
                             <NavLink to="https://www.youtube.com/@fabianoneumann" title="YouTube" target="_blank">YouTube</NavLink>
                             <NavLink to="https://www.instagram.com/fabianoneumann/" title="Instagram" target="_blank">Instagram</NavLink>
-                            <NavLink to="https://twitter.com/fabianoneumann" title="Twitter" target="_blank">Twitter</NavLink>
-                            <NavLink to="https://www.linkedin.com/in/fabiano-berlinck-neumann-49b39457/" title="Linkedin" target="_blank">Linkedin</NavLink>
-                            <NavLink to="https://github.com/fabianoneumann" title="GitHub" target="_blank">GitHub</NavLink>
+                            <NavLink to="https://twitter.com/fabianoneumann" title="TikTok" target="_blank">TikTok</NavLink>
                         </nav>
                     </FooterColumn>
                     <FooterColumn>
@@ -48,7 +46,7 @@ export function Footer() {
                             <NavLink to="https://github.com/fabianoneumann" title="GitHub" target="_blank">GitHub</NavLink>
                         </nav>
                     </FooterColumn>
-                </div>
+                </FooterLinksContainer>
             </FooterContent>
         </FooterContainer>
     )

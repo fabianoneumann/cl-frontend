@@ -52,3 +52,10 @@ export const FooterColumn = styled.div`
         }
     }
 `;
+
+export const FooterLinksContainer = styled.div`
+    display: flex;
+    gap: 5rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+`;
