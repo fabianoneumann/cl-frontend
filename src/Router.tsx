@@ -8,7 +8,7 @@ export function Router() {
     return (
         <Routes>
             <Route path="/" element={<DefaultLayout />}>
-                <Route path="/" element={<LandingPage />} />
+                <Route path="/cl-frontend/" element={<LandingPage />} />
                 <Route path="/votos-da-semana" element={<VotesToStudy />} />
 
                 <Route path="*" element={<PageNotFound />} />

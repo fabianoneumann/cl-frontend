@@ -38,7 +38,7 @@ export function Header() {
                 </HeaderMenuMobileButton>
                 { isOpen && 
                     <HeaderMenuMobile>
-                        <NavLink onClick={handleOpenMenu} to="/">Cripto Lucrativo</NavLink>
+                        <NavLink onClick={handleOpenMenu} to="/cl-frontend/">Cripto Lucrativo</NavLink>
                         <NavLink onClick={handleOpenMenu} to="/cl-web3-dev">CL Web3 Dev</NavLink>
                         <NavLink onClick={handleOpenMenu} to="/boletim-cl">Boletim CL</NavLink>
                         <NavLink onClick={handleOpenMenu} to="/livros">Livros</NavLink>
@@ -46,7 +46,7 @@ export function Header() {
                         <NavLink onClick={handleOpenMenu} to="/aulas">Aulas</NavLink>
                     </HeaderMenuMobile>
                 }
-                <HeaderLogo to="/">Cripto Lucrativo</HeaderLogo>
+                <HeaderLogo to="/cl-frontend/">Cripto Lucrativo</HeaderLogo>
                 <HeaderMenu>
                     <NavLink to="/cl-web3-dev">CL Web3 Dev</NavLink>
                     <NavLink to="/boletim-cl">Boletim CL</NavLink>
@@ -55,7 +55,7 @@ export function Header() {
                     <NavLink to="/aulas">Aulas</NavLink>
                     <NavLink to="/aulas" style={{ display: 'none' }}>Aulas</NavLink>
                 </HeaderMenu>
-                <LoginButton to="/" onClick={handleLoginClick}>Entrar</LoginButton>
+                <LoginButton to="/cl-frontend/" onClick={handleLoginClick}>Entrar</LoginButton>
             </HeaderContent>
         </HeaderCointainer>
     )

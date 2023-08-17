@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 import { 
     LandingPageContainer, 
     LandingPageContent, 
@@ -370,6 +370,7 @@ export function LandingPage() {
                         Entenda mais sobre o dinheiro do futuro. Comece a planejar seus investimentos agora mesmo!
                     </LandingPageSectionParagraph>
                 </LandingPageSectionContainer>
+                
                 <img style={{width: "100%"}} src={mentoresCL} alt="mentores-cl" />
             </LandingPageContent>
         </LandingPageContainer>

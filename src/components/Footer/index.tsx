@@ -2,6 +2,7 @@ import { FooterColumn, FooterContainer, FooterContent, FooterLinksContainer } fr
 import { NavLink } from "react-router-dom";
 
 import logoCL from "../../assets/images/logo-cl.png";
+import { DiscordLogo } from "phosphor-react";
 
 export function Footer() {
     return (
@@ -15,12 +16,13 @@ export function Footer() {
                     <p>CNPJ: 25.049.417/0001-70</p>
                     <p>Todos os direitos reservados</p>
                     <p>Developed by: Fabiano B. Neumann</p>
+                    <NavLink style={{maxWidth: 'fit-content'}} to="/aulas" title="Discord"><DiscordLogo size={32} color="cornflowerblue"/></NavLink>
                 </FooterColumn>
                 <FooterLinksContainer>
                     <FooterColumn>
                         <span>Projetos:</span>
                         <nav>
-                            <NavLink to="/" title="Comunidde CL">Comunidade CL</NavLink>
+                            <NavLink to="/cl-frontend/" title="Comunidde CL">Comunidade CL</NavLink>
                             <NavLink to="/cl-web3-dev" title="CL Dev Web3">CL Dev Web3</NavLink>
                             <NavLink to="/boletim-cl" title="Boletim CL">Boletim CL</NavLink>
                             <NavLink to="/livros" title="Livros">Livros</NavLink>
@@ -31,9 +33,9 @@ export function Footer() {
                     <FooterColumn>
                         <span>Daniel:</span>
                         <nav>
-                            <NavLink to="https://www.youtube.com/@fabianoneumann" title="YouTube" target="_blank">YouTube</NavLink>
-                            <NavLink to="https://www.instagram.com/fabianoneumann/" title="Instagram" target="_blank">Instagram</NavLink>
-                            <NavLink to="https://twitter.com/fabianoneumann" title="TikTok" target="_blank">TikTok</NavLink>
+                            <NavLink to="https://www.youtube.com/@DanielFaouakhiri" title="YouTube" target="_blank">YouTube</NavLink>
+                            <NavLink to="https://www.instagram.com/danielfaouakhiri/" title="Instagram" target="_blank">Instagram</NavLink>
+                            <NavLink to="https://www.tiktok.com/@danielfaouakhiri" title="TikTok" target="_blank">TikTok</NavLink>
                         </nav>
                     </FooterColumn>
                     <FooterColumn>
