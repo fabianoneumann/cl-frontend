@@ -16,7 +16,7 @@ export function Footer() {
                     <p>CNPJ: 25.049.417/0001-70</p>
                     <p>Todos os direitos reservados</p>
                     <p>Developed by: Fabiano B. Neumann</p>
-                    <NavLink style={{maxWidth: 'fit-content'}} to="/aulas" title="Discord"><DiscordLogo size={32} color="cornflowerblue"/></NavLink>
+                    <NavLink style={{maxWidth: 'fit-content'}} to="https://discord.gg/MaQ5a96dKv" title="Discord"><DiscordLogo size={32} color="cornflowerblue"/></NavLink>
                 </FooterColumn>
                 <FooterLinksContainer>
                     <FooterColumn>

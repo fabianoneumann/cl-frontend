@@ -51,12 +51,14 @@ export const LandingPageTyperContainer = styled.div`
         color: ${props => props.theme['gray-300']};
         font-weight: bold;
         font-size: 1.15rem;
+        text-align: center;
     }
 
     span {
         font-weight: bold;
         color: ${props => props.theme['orange-btc']};
         font-size: 1.15rem;
+        text-align: center;
     }
 
     @media (max-width: 900px) {
