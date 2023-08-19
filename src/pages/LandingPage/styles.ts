@@ -1,6 +1,24 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { ArrowBendDownRight } from 'phosphor-react';
+
+import { 
+    ArrowBendDownRight,
+    CurrencyBtc,
+    RocketLaunch, 
+    Books, 
+    Money, 
+    DiscordLogo,
+    ChartLine, 
+    ChartPieSlice, 
+    CurrencyDollar, 
+    CurrencyEth,
+    TerminalWindow, 
+    Student, 
+    UsersThree,
+    ShieldCheck,
+    Handshake,
+    MonitorPlay,
+} from "phosphor-react";
 
 export const LandingPageContainer = styled.div`
     width: 100%;
@@ -13,7 +31,11 @@ export const LandingPageContent = styled.div`
     z-index: 1;
 `;
 
-export const LandingPageSectionContainer = styled.section<{$index: number; }>`
+interface LandingPageSectionProps {
+    $index: number;
+}
+
+export const LandingPageSectionContainer = styled.section<LandingPageSectionProps>`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -159,6 +181,21 @@ export const LandingPageSectionActiveEducationCardHeader = styled.div`
     }
 `;
 
+export const RocketLaunchIcon = styled(RocketLaunch)`
+    font-size: 4rem;
+    color: gold;
+`;
+
+export const BooksIcon = styled(Books)`
+    font-size: 4rem;
+    color: chocolate;
+`;
+
+export const MoneyIcon = styled(Money)`
+    font-size: 4rem;
+    color: lime;
+`;
+
 export const LandingPageSectionWhyCLContent = styled.div`
     display: flex;
     justify-content: center;
@@ -188,6 +225,51 @@ export const LandingPageSectionWhyCLItem = styled.div`
         line-height: 1.625rem;
         text-align: center;
     }
+`;
+
+export const BitcoinIcon = styled(CurrencyBtc)`
+    color: ${props => props.theme['orange-btc']};
+    font-size: 3rem;
+`;
+
+export const DiscordIcon = styled(DiscordLogo)`
+    color: cornflowerblue;
+    font-size: 3rem;
+`;
+
+export const ChartLineIcon = styled(ChartLine)`
+    color: darkcyan;
+    font-size: 3rem;
+`;
+
+export const ChartPieSliceIcon = styled(ChartPieSlice)`
+    color: red;
+    font-size: 3rem;
+`;
+
+export const CurrencyDollarIcon = styled(CurrencyDollar)`
+    color: limegreen;
+    font-size: 3rem;
+`;
+
+export const CurrencyEthIcon = styled(CurrencyEth)`
+    color: lightsteelblue;
+    font-size: 3rem;
+`;
+
+export const TerminalWindowIcon = styled(TerminalWindow)`
+    color: darkorchid;
+    font-size: 3rem;
+`;
+
+export const StudentIcon = styled(Student)`
+    color: lime;
+    font-size: 3rem;
+`;
+
+export const UsersThreeIcon = styled(UsersThree)`
+    color: olivedrab;
+    font-size: 3rem;
 `;
 
 export const LandingPageSectionNumbersContent = styled.div`
@@ -264,6 +346,7 @@ export const LandingPageSectionWhoForList = styled.ul`
 `;
 
 export const ColoredArrowBendDownRight = styled(ArrowBendDownRight)`
+    font-size: 2.3rem;
     color: ${props => props.theme['orange-btc']};
     display: flex;
     flex-shrink: 0;
@@ -309,4 +392,19 @@ export const LandingPageSectionSafeAreaText = styled.div`
         
         max-width: 17.5rem;
     }
+`;
+
+export const ShieldCheckIcon = styled(ShieldCheck)`
+    color: lightsteelblue;
+    font-size: 4rem;
+`;
+
+export const HandshakeIcon = styled(Handshake)`
+    color: lightsteelblue;
+    font-size: 4rem;
+`;
+
+export const MonitorPlayIcon = styled(MonitorPlay)`
+    color: lightsteelblue;
+    font-size: 4rem;
 `;

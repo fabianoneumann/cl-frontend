@@ -58,4 +58,15 @@ export const FooterLinksContainer = styled.div`
     gap: 5rem;
     justify-content: space-between;
     flex-wrap: wrap;
+    
+    margin-top: 2rem;
+
+    @media (max-width: 900px) {
+        justify-content: center;
+    }
+
+    @media (max-width: 620px) {
+        display: flex;
+        flex-direction: column;
+    }
 `;

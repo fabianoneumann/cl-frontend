@@ -22,26 +22,23 @@ import {
     LandingPageSectionSafeAreaItem,
     LandingPageSectionSafeAreaText,
     LandingPageSectionWhoForList,
-    ColoredArrowBendDownRight
+    ColoredArrowBendDownRight,
+    BitcoinIcon,
+    CurrencyEthIcon,
+    RocketLaunchIcon,
+    BooksIcon,
+    MoneyIcon,
+    ChartLineIcon,
+    CurrencyDollarIcon,
+    ChartPieSliceIcon,
+    TerminalWindowIcon,
+    StudentIcon,
+    UsersThreeIcon,
+    DiscordIcon,
+    ShieldCheckIcon,
+    MonitorPlayIcon,
+    HandshakeIcon
 } from "./styles";
-
-import { 
-    RocketLaunch, 
-    Books, 
-    Money, 
-    DiscordLogo,
-    ChartLine, 
-    ChartPieSlice, 
-    CurrencyDollar, 
-    CurrencyEth,
-    TerminalWindow, 
-    Student, 
-    UsersThree,
-    CurrencyBtc,
-    ShieldCheck,
-    Handshake,
-    MonitorPlay,
-} from "phosphor-react";
 
 import { Typewriter } from "react-simple-typewriter";
 
@@ -59,6 +56,7 @@ import result09 from "../../assets/images/resultado-09.png";
 import result10 from "../../assets/images/resultado-10.png";
 import result11 from "../../assets/images/resultado-11.png";
 import result12 from "../../assets/images/resultado-12.png";
+import { Accordion } from "../../components/Accordion";
 
 export function LandingPage() {
     //React.useEffect(() => {
@@ -70,13 +68,66 @@ export function LandingPage() {
         "das finanças descentralizadas (DEFI)",
         "da carteira de investimentos mais responsável",
         "do gerenciamento de risco e de capital",
+        "da leitura e interpretacão dos candles",
+        "da leitura e interpretação dos gráficos",	
         "da identificação dos topos e fundos",
         "das linhas de tendência de alta e baixa",
-        "das estratégias de Fibonacci e Elliott", "dos padrões gráficos",
+        "das estratégias com Fibonacci e Elliott", "dos padrões gráficos",
         "das ondas de impulsão e correção", "dos ciclos de mercado",
         "das estratégias de investimento", "das estratégias de trade",
-        "das estratégias de DEFI", "da programação com e sem blockchain",
+        "da renda passiva com DEFI", "da programação com e sem blockchain",
         "do desenvolvimento pessoal e profissional",
+    ];
+
+    const accordionData = [
+        {
+            'question': 'O que é a Comunidade Cripto Lucrativo?',
+            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+        },
+        {
+            'question': 'Como funciona a Comunidade Cripto Lucrativo?',
+            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+        },
+        {
+            'question': 'Quais são os benefícios de ser membro da Comunidade Cripto Lucrativo?',
+            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+        },
+        {
+            'question': 'Quais são os conteúdos disponíveis na Comunidade Cripto Lucrativo?',
+            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+        },
+        {
+            'question': 'Quais são os diferenciais da Comunidade Cripto Lucrativo?',
+            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+        },
+        {
+            'question': 'Quais são os resultados dos membros da Comunidade Cripto Lucrativo?',
+            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+        },
+        {
+            'question': 'Quem são os mentores da Comunidade Cripto Lucrativo?',
+            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+        },
+        {
+            'question': 'Como faço para entrar na Comunidade Cripto Lucrativo?',
+            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+        },
+        {
+            'question': 'Como faço para pagar a Comunidade Cripto Lucrativo?',
+            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+        },
+        {
+            'question': 'Como faço para acessar a Comunidade Cripto Lucrativo?',
+            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+        },
+        {
+            'question': 'Como faço para cancelar minha assinatura da Comunidade Cripto Lucrativo?',
+            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+        },
+        {
+            'question': 'Como faço para tirar dúvidas sobre a Comunidade Cripto Lucrativo?',
+            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+        },
     ];
 
     return (
@@ -130,21 +181,21 @@ export function LandingPage() {
                         <LandingPageSectionActiveEducationCard>
                             <LandingPageSectionActiveEducationCardHeader>
                                 <h2>Atitude</h2>
-                                <RocketLaunch color="gold" size={64} weight="duotone" />
+                                <RocketLaunchIcon weight="duotone" />
                             </LandingPageSectionActiveEducationCardHeader>
                             <p>A sua vontade, comportamentos e posturas adequadas em relação aos estudos e ao mercado são o pontapé inicial para o seu sucesso. As atitudes incluem aspectos como ética, motivação, trabalho em equipe, resiliência e adaptabilidade.</p>
                         </LandingPageSectionActiveEducationCard>
                         <LandingPageSectionActiveEducationCard>
                             <LandingPageSectionActiveEducationCardHeader>
                                 <h2>Conhecimento</h2>
-                                <Books color="chocolate" size={64} weight="duotone" />
+                                <BooksIcon weight="duotone" />
                             </LandingPageSectionActiveEducationCardHeader>
                             <p>Você terá acesso ao conhecimento teórico e prático utilizado por investidores, traders e programadores que vivem do mundo cripto, por meio de vídeos para assistir quando preferir, além do conteúdo em lives e nas salas de texto e voz no Discord.</p>
                         </LandingPageSectionActiveEducationCard>
                         <LandingPageSectionActiveEducationCard>
                             <LandingPageSectionActiveEducationCardHeader>
                                 <h2>Habilidades</h2>
-                                <Money color="lime" size={64} weight="duotone" />
+                                <MoneyIcon weight="duotone" />
                             </LandingPageSectionActiveEducationCardHeader>
                             <p>Em contato com profissionais, você terá exemplos no dia a dia para aplicar o conhecimento na prática, de forma eficiente. Com aprendizagem ativa e aprimoramentos ao longo do tempo, você saberá fazer e se tornará especialista no mercado cripto.</p>
                         </LandingPageSectionActiveEducationCard>
@@ -157,63 +208,63 @@ export function LandingPage() {
                     </LandingPageSectionSubtitle>
                     <LandingPageSectionWhyCLContent>
                         <LandingPageSectionWhyCLItem>
-                            <CurrencyBtc color="chocolate" size={48} weight="bold" />
+                            <BitcoinIcon weight="bold" />
                             <h3>Análise de Fundamentos</h3>
                             <p>
                                 Saiba como escolher os melhores projetos e com maior potencial para compor sua carteira
                             </p>
                         </LandingPageSectionWhyCLItem>
                         <LandingPageSectionWhyCLItem>
-                            <ChartLine color="darkcyan" size={48} weight="duotone" />
+                            <ChartLineIcon weight="duotone" />
                             <h3>Análise Técnica</h3>
                             <p>
                                 Aprenda a ler e interpretar os gráficos de forma profissional e melhore seus resultados
                             </p>
                         </LandingPageSectionWhyCLItem>
                         <LandingPageSectionWhyCLItem>
-                            <CurrencyDollar color="green" size={48} weight="bold" />
+                            <CurrencyDollarIcon weight="bold" />
                             <h3>Análise de Liquidez</h3>
                             <p>
                                 Entenda como funciona os pontos de stops, liquidações e reversões de tendência
                             </p>
                         </LandingPageSectionWhyCLItem>
                         <LandingPageSectionWhyCLItem>
-                            <ChartPieSlice color="red" size={48} weight="duotone" />
+                            <ChartPieSliceIcon weight="duotone" />
                             <h3>Gestão de Risco</h3>
                             <p>
                                 Domine a gestão de risco e do capital para aumentar seus lucros e diminuir suas perdas
                             </p>
                         </LandingPageSectionWhyCLItem>
                         <LandingPageSectionWhyCLItem>
-                            <CurrencyEth color="orange" size={48} weight="duotone" />
+                            <CurrencyEthIcon weight="duotone" />
                             <h3>DEFI</h3>
                             <p>
                                 Conheça e utilize os protocolos de finanças descentralizadas para gerar renda passiva
                             </p>
                         </LandingPageSectionWhyCLItem>
                         <LandingPageSectionWhyCLItem>
-                            <TerminalWindow color="darkorchid" size={48} weight="duotone" />
+                            <TerminalWindowIcon weight="duotone" />
                             <h3>Programação Web3</h3>
                             <p>
                                 Desenvolva aplicações que geram e utilizam smart contracts e entre para o mercado de TI
                             </p>
                         </LandingPageSectionWhyCLItem>
                         <LandingPageSectionWhyCLItem>
-                            <Student color="lime" size={48} weight="duotone" />
+                            <StudentIcon weight="duotone" />
                             <h3>Educação Ativa</h3>
                             <p>
                                 Se torne especialista com o método de aprendizagem mais avançado, que une teoria e prática
                             </p>
                         </LandingPageSectionWhyCLItem>
                         <LandingPageSectionWhyCLItem>
-                            <UsersThree color="olive" size={48} weight="duotone" />
+                            <UsersThreeIcon weight="duotone" />
                             <h3>Mentorias</h3>
                             <p>
                                 Mentoria no discord por texto e voz com profissionais que vivem do mercado
                             </p>
                         </LandingPageSectionWhyCLItem>
                         <LandingPageSectionWhyCLItem>
-                            <DiscordLogo color="cornflowerblue" size={48} weight="duotone" />
+                            <DiscordIcon weight="duotone" />
                             <h3>Discord</h3>
                             <p>
                                 Ambiente para aulas, bater papo, tirar dúvidas e interagir com membros da comunidade
@@ -284,34 +335,34 @@ export function LandingPage() {
                         Para quem é a Comunidade <span>Cripto Lucrativo</span>
                     </LandingPageSectionSubtitle>
                     <LandingPageSectionWhoForList>
-                        <li><ColoredArrowBendDownRight size={32}/> Para quem deseja viver do mercado cripto, seja como especulador ou como maker</li>
-                        <li><ColoredArrowBendDownRight size={32}/> Para quem está buscando liberdade financeira e independência financeira</li>
-                        <li><ColoredArrowBendDownRight size={32}/> Para quem tem sede por conhecimento e quer conteúdo mais avançado para sair do amadorismo</li>
-                        <li><ColoredArrowBendDownRight size={32}/> Para quem sabe a importância de um bom grupo para estudar e trabalhar junto e busca uma comunidade com interação por texto e voz</li>
-                        <li><ColoredArrowBendDownRight size={32}/> Para quem quer aprender a investir, fazer trade, utilizar DEFI ou a programar aplicações com e sem blockchain</li>
-                        <li><ColoredArrowBendDownRight size={32}/> Para quem quer ter um engenheiro de software, cientista da computação, empreendedor, investidor e trader como principal mentor de mercado</li>
-                        <li><ColoredArrowBendDownRight size={32}/> Para quem cansou de perder dinheiro com trade e decidiu virar o jogo</li>
+                        <li><ColoredArrowBendDownRight />Para quem deseja viver do mercado cripto, seja como especulador ou como maker</li>
+                        <li><ColoredArrowBendDownRight />Para quem está buscando liberdade financeira e independência financeira</li>
+                        <li><ColoredArrowBendDownRight />Para quem tem sede por conhecimento e quer conteúdo mais avançado para sair do amadorismo</li>
+                        <li><ColoredArrowBendDownRight />Para quem sabe a importância de um bom grupo para estudar e trabalhar junto e busca uma comunidade com interação por texto e voz</li>
+                        <li><ColoredArrowBendDownRight />Para quem quer aprender a investir, fazer trade, utilizar DEFI ou a programar aplicações com e sem blockchain</li>
+                        <li><ColoredArrowBendDownRight />Para quem quer ter um engenheiro de software, cientista da computação, empreendedor, investidor e trader como principal mentor de mercado</li>
+                        <li><ColoredArrowBendDownRight />Para quem cansou de perder dinheiro com trade e decidiu virar o jogo</li>
                     </LandingPageSectionWhoForList>
                 </LandingPageSectionContainer>
 
                 <LandingPageSectionContainer $index={7}>
                     <LandingPageSectionSafeAreaContent>
                         <LandingPageSectionSafeAreaItem>
-                            <ShieldCheck size={64} weight="duotone" />
+                            <ShieldCheckIcon weight="duotone" />
                             <LandingPageSectionSafeAreaText>
                                 <h3>Pagamento Seguro</h3>
                                 <p>Seus dados estão protegidos e sua compra é 100% segura</p>
                             </LandingPageSectionSafeAreaText>
                         </LandingPageSectionSafeAreaItem>
                         <LandingPageSectionSafeAreaItem>
-                            <MonitorPlay size={64} weight="duotone" />
+                            <MonitorPlayIcon weight="duotone" />
                             <LandingPageSectionSafeAreaText>
                                 <h3>Acesso Imediato</h3>
                                 <p>Seu login e senha serão enviados ao seu e-mail logo após o processamento do pagamento</p>
                             </LandingPageSectionSafeAreaText>
                         </LandingPageSectionSafeAreaItem>
                         <LandingPageSectionSafeAreaItem>
-                            <Handshake size={64} weight="duotone" />
+                            <HandshakeIcon weight="duotone" />
                             <LandingPageSectionSafeAreaText>
                                 <h3>7 dias de garantia</h3>
                                 <p>Você poderá pedir a devolução de 100% do seu dinheiro dentro deste prazo</p>
@@ -346,9 +397,7 @@ export function LandingPage() {
                     <LandingPageSectionSubtitle>
                         Perguntas <span>Frequêntes</span>
                     </LandingPageSectionSubtitle>
-                    <LandingPageSectionParagraph>
-                        Acordion com perguntas e respostas que só aparecem quando aberta
-                    </LandingPageSectionParagraph>
+                    <Accordion data={accordionData} />
                 </LandingPageSectionContainer>
 
                 <LandingPageSectionContainer $index={11}>
