@@ -57,6 +57,7 @@ import result10 from "../../assets/images/resultado-10.png";
 import result11 from "../../assets/images/resultado-11.png";
 import result12 from "../../assets/images/resultado-12.png";
 import { Accordion } from "../../components/Accordion";
+import { NavLink } from "react-router-dom";
 
 export function LandingPage() {
     //React.useEffect(() => {
@@ -82,52 +83,64 @@ export function LandingPage() {
     const accordionData = [
         {
             'question': 'O que é a Comunidade Cripto Lucrativo?',
-            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+            'answer': 'Ambiente de aprendizagem ativa com teoria e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3, com mentorias via Discord.'
         },
         {
-            'question': 'Como funciona a Comunidade Cripto Lucrativo?',
-            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+            'question': 'Nunca investi em criptomoedas, este Treinamento é para mim?',
+            'answer': 'Sim. O conteúdo das aulas vai permitir que você aprenda como investir melhor no mercado de criptomoedas. O intuito é que você seja o protagonista da sua jornada de investidor.'
         },
         {
-            'question': 'Quais são os benefícios de ser membro da Comunidade Cripto Lucrativo?',
-            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+            'question': 'Já invisto em criptomoedas, este Treinamento é para mim?',
+            'answer': 'Investidores experientes também se beneficiam do conteúdo e comunidade CL. Você vai se aprofundar em análise técnica (gráfica), de sentimento (liquidez), gerenciamento de risco, análise fundamentalista e programação. Participar da Comunidade e ficar por dentro de informações relevantes do mercado cripto também pode te ajudar nos investimentos.'
         },
         {
-            'question': 'Quais são os conteúdos disponíveis na Comunidade Cripto Lucrativo?',
-            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+            'question': 'Quero começar a investir, mas tenho medo. O Treinamento me ajuda?',
+            'answer': 'Sim. O CL vai fazer com que você se sinta mais seguro ao investir seu dinheiro. Um dos pilares que sustentam o CL é Gerenciamento de Risco. Você vai aprender como proteger seu dinheiro de eventuais desvalorizações e alta volatilidade, além de saber dimensionar adequadamente as sua posições.'
         },
         {
-            'question': 'Quais são os diferenciais da Comunidade Cripto Lucrativo?',
-            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+            'question': 'É só para quem investir valores altos?',
+            'answer': 'Não. Este treinamento e comunidade foram criados para todos os investidores, independente do tamanho do bolso ou capital investido. Investir em conhecimento é o melhor investimento que você pode fazer para estar preparado(a) quando o capital ficar maior.'
         },
         {
-            'question': 'Quais são os resultados dos membros da Comunidade Cripto Lucrativo?',
-            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+            'question': 'O CL fala só de Bitcoin ou de outras criptomoedas também?',
+            'answer': 'No CL nós estudamos o mercado cripto, além do fluxo do dinheiro dentro do mercado e no mundo como um todo, entre ativos de maior ou menor risco. Você irá aprender a avaliar ciclos de mercado e macroeconomia.'
         },
         {
-            'question': 'Quem são os mentores da Comunidade Cripto Lucrativo?',
-            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+            'question': 'Eu vou aprender como comprar e vender Bitcoin?',
+            'answer': 'Sim. Você vai sair do básico ao avançado em compras e vendas de investimento e de trading. Além de comprar e vender Bitcoin e outras criptomoedas, você vai aprender a operar tanto na compra quanto na venda com contratos futuros.'
         },
         {
-            'question': 'Como faço para entrar na Comunidade Cripto Lucrativo?',
-            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+            'question': 'Vou encontrar sinais de operações de compra ou venda no CL?',
+            'answer': 'Eventualmente algumas oportunidades podem aparecer enquanto estivermos juntos na comunidade via Discord. Entrentanto, o treinamento e comunidade trata do mercado de maneira geral, sem foco em sinais de trade. Caso aconteça, será apenas educacional.'
         },
         {
-            'question': 'Como faço para pagar a Comunidade Cripto Lucrativo?',
-            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+            'question': 'Vou aprender a ler gráficos e entender indicadores??',
+            'answer': 'Sim. Você vai aprender a ler e interpretar as velas e os gráficos de maneira profissional. Além disso, você vai aprender a utilizar indicadores de maneira eficiente, sem precisar de muitos indicadores para tomar decisões.'
         },
         {
-            'question': 'Como faço para acessar a Comunidade Cripto Lucrativo?',
-            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+            'question': 'Como funciona a mentoria?',
+            'answer': 'A mentoria é feita via Discord, por texto e voz, em grupo. Atendimentos individuais pode acontecer para os membros mais ativos, em casos particulares, selecionados pelos mentores. Você pode tirar dúvidas sobre o conteúdo das aulas, sobre o mercado e sobre o que mais precisar dentro da comunidade. A mentoria é feita por profissionais que vivem do mercado cripto.'
         },
         {
-            'question': 'Como faço para cancelar minha assinatura da Comunidade Cripto Lucrativo?',
-            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+            'question': 'Por quanto tempo terei acesso ao conteúdo e à comunidade?',
+            'answer': 'Enquanto sua anuidade estiver ativa, você terá acesso completo ao conteúdo. Basta renovar a anuidade para continuar tendo acesso ao material e a comunidade de alunos. Nossa equipe e mentores adicionam conteúdos novos de tempos em tempos – é sempre bom estar atualizado!'
         },
         {
-            'question': 'Como faço para tirar dúvidas sobre a Comunidade Cripto Lucrativo?',
-            'answer': 'Ambiente de aprendizagem ativa com conteúdo e prática para você se tornar especialista em investimentos, trading, DEFI e desenvolvimento Web3'
+            'question': 'As operações apresentadas nas Redes Sociais serão compartilhadas?',
+            'answer': 'Não. Os mentores possuem experiência e aproveitam oportunidades de alto risco fora dos horários de atendimentos. Dentro do CL, o objetivo é compartilhar conhecimento e possibilitar que os estudantes sejam capazes de tomar as próprias decisões dentro do mercado.'
         },
+        {
+            'question': 'Como faço para entras na Comunidade Cripto Lucrativo?',
+            'answer': 'Basta clicar no botão “QUERO FAZER PARTE DA COMUNIDADE CRIPTO LUCRATIVO” e seguir as instruções. Você será redirecionado para a página de pagamento, onde poderá escolher a forma de pagamento e concluir a compra. Após a confirmação do pagamento, você receberá um e-mail com a confirmação para acessar o conteúdo do CL dentro da plataforma da Hotmart e na Página do CL. Lá dentro você terá acesso ao vídeo que ensina sobre o Discord, caso você não conheça a ferramenta.'
+        },
+        {
+            'question': 'Você fazem lives para os alunos?',
+            'answer': 'Sim, fazemos lives para membros da comunidade. As lives são feitas via YouTube e os links são compartilhados no Discord. Além das lives, temos encontros para aulas síncronas para estudar o que está acontecendo em tempo real. Em alguns momentos a comunidade irá funcionar como uma sala de operações, quando investigaremos se existem oportunidades com base nas estratégias utilizadas pelos mentores e membros mais experientes.'
+        },
+        {
+            'question': 'Se no futuro eu não quiser continuar, como faço para cancelar minha assinatura?',
+            'answer': 'Você pode cancelar a sua assinatura e ter devolução de 100% do seu dinheiro dentro do prazo de 7 dias. Depois disso, mesmo que tenha parcelado a compra em 12x, como se trata de uma anuidade, o cancelamento irá interromper a renovação automática da anuidade. Você continuará tendo acesso ao conteúdo e a comunidade até o final do período contratado. Essa política de cancelamento é padrão da Hotmart, que é a plataforma que utilizamos para processar os pagamentos. Qualquer necessidade nesse sentido pode ser tratada diretamente com a Hotmart, no suporte do site deles.'
+        }
     ];
 
     return (
@@ -264,7 +277,13 @@ export function LandingPage() {
                             </p>
                         </LandingPageSectionWhyCLItem>
                         <LandingPageSectionWhyCLItem>
-                            <DiscordIcon weight="duotone" />
+                            <NavLink
+                                style={{maxWidth: 'fit-content'}}
+                                to="https://discord.gg/MaQ5a96dKv" 
+                                title="Discord"
+                            >
+                                <DiscordIcon weight="duotone" />
+                            </NavLink>
                             <h3>Discord</h3>
                             <p>
                                 Ambiente para aulas, bater papo, tirar dúvidas e interagir com membros da comunidade
