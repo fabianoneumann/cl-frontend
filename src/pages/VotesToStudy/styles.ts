@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const VotesToStudyContainer = styled.div`
     width: 100%;
+    padding: 7.125rem 2rem 5rem;
 `;
 
 export const VotesToStudyContent = styled.div`
@@ -15,7 +16,6 @@ export const VotesToStydyHeader = styled.div`
 
 export const VotesToStudyTitle = styled.h1`
     font-weight: bold;
-    padding: 500px;
 `;
 
 export const VotesToStudyAvailableVotes = styled.div`
