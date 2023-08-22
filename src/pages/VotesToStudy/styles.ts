@@ -19,13 +19,12 @@ export const VotesToStudyTitle = styled.h1`
 export const VotesContainer = styled.main`
     width: 100%;
     max-width: 1120px;
-    margin: 0 auto;
     padding: 0 1.5rem;
+    margin-top: 1.75rem;
 `;
 
 export const VotesTable = styled.table`
     width: 100%;
-    margin-top: 2rem 1rem 0;
     border-collapse: separate;
     border-spacing: 0 0.5rem;
     color: ${props => props.theme["gray-300"]};
@@ -82,12 +81,18 @@ export const VotesTable = styled.table`
     }
 
     @media (max-width: 768px) {
-        td:nth-child(2) {
-            display: none;
-        }
-
         th:nth-child(2) {
             display: none;
         }
+        
+        td:nth-child(2) {
+            display: none;
+        }
     }
+`;
+
+export const TableFooterText = styled.p`
+    margin-top: 2rem;
+    text-align: center;
+    color: ${props => props.theme["gray-300"]};
 `;
