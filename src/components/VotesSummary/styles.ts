@@ -14,18 +14,19 @@ export const SummaryContainer = styled.section`
 
     @media (max-width: 900px) {
         grid-template-columns: 1fr;
+        gap: 0;
     }
 `;
 
 export const TotalVoteIcon = styled(Checks)`
-    color: ${props => props.theme["gray-300"]};
+    color: ${props => props.theme["gray-400"]};
     font-size: 2.5rem;
     display: flex;
     flex-shrink: 0;
 `;
 
 export const WeeklyVotesIcon = styled(CalendarCheck)`
-    color: ${props => props.theme["gray-300"]};
+    color: ${props => props.theme["gray-400"]};
     font-size: 2.5rem;
     display: flex;
     flex-shrink: 0;
@@ -60,12 +61,11 @@ export const SummaryCard = styled.div<SummaryCardProps>`
         display: flex;
         align-items: center;
         justify-content: space-between;
-        color: ${props => props.theme["gray-300"]};
         gap: 1rem;
         
         span {
             font-size: 1.25rem;
-            color: ${props => props.theme["gray-100"]};
+            color: ${props => props.theme["gray-300"]};
         }      
     }
 

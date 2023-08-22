@@ -6,7 +6,7 @@ interface SummaryProps {
     availableVotes: number;
 }
 
-export function Summary(props: SummaryProps) {
+export function VotesSummary(props: SummaryProps) {
     const { totalVotes, weeklyVotes, availableVotes } = props;
     
     const canVote = availableVotes > 0;
@@ -23,8 +23,8 @@ export function Summary(props: SummaryProps) {
 
             <SummaryCard>
                 <header>
-                    <span>Total da Semana</span>
-                    <WeeklyVotesIcon />
+                    <span>Votos da Semana</span>
+                    <WeeklyVotesIcon weight="duotone" />
                 </header>
                 <strong>{weeklyVotes}</strong>
             </SummaryCard>

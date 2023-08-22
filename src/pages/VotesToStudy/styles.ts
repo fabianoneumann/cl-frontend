@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const VotesToStudyContainer = styled.div`
     width: 100%;
     padding: 7.125rem 2rem 5rem;
+    margin: 0 auto;
 `;
 
 export const VotesToStudyContent = styled.div`
@@ -11,15 +12,82 @@ export const VotesToStudyContent = styled.div`
     align-items: center;
 `;
 
-export const VotesToStydyHeader = styled.div`
-`;
-
 export const VotesToStudyTitle = styled.h1`
     font-weight: bold;
 `;
 
-export const VotesToStudyAvailableVotes = styled.div`
+export const VotesContainer = styled.main`
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
 `;
 
-export const VotesToStudyList = styled.div`
+export const VotesTable = styled.table`
+    width: 100%;
+    margin-top: 2rem 1rem 0;
+    border-collapse: separate;
+    border-spacing: 0 0.5rem;
+    color: ${props => props.theme["gray-300"]};
+
+    th {
+        color: ${props => props.theme["gray-100"]};
+        font-weight: bold;
+        padding: 1rem 2rem 0;
+        text-align: left;
+        line-height: 1.5rem;
+    }
+
+    td {
+        padding: 1rem 2rem;
+        border: 0;
+        background: ${props => props.theme["gray-600"]};
+        font-weight: normal;
+        
+        &:first-child {
+            border-radius: 6px 0 0 6px;
+        }
+
+        &:last-child {
+            border-radius: 0 6px 6px 0;
+            text-align: right;
+        }
+
+        div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        img {
+            height: 2rem;
+        }
+
+        button {
+            padding: 0.25rem 0.75rem;
+            border: 1px solid ${props => props.theme["orange-btc"]};
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+
+            background: transparent;
+            color: ${props => props.theme["gray-100"]};
+
+            &:hover {
+                background: ${props => props.theme["orange-btc"]};
+                color: ${props => props.theme["gray-900"]};
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        td:nth-child(2) {
+            display: none;
+        }
+
+        th:nth-child(2) {
+            display: none;
+        }
+    }
 `;
