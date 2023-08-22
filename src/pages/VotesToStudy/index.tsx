@@ -50,7 +50,7 @@ export function VotesToStudy() {
             });
 
             setVotes(updatedVoteList);
-            
+            alert('Voto computado com sucesso!');
         } else if (availableVotes === 0) {
             alert('Você não tem mais votos disponíveis!');
         }
@@ -107,7 +107,9 @@ export function VotesToStudy() {
                         </tbody>
                     </VotesTable>
                     <TableFooterText>
-                        Lista com as 30 altcoins mais votadas. Utilize o campo de busca para visualizar e votar em outras altcoins.
+                        Lista com as 30 altcoins mais votadas. 
+                        Utilize o campo de busca para visualizar e votar em outras altcoins.
+                        Caso não encontre, entre em contato ná página de suporte (após login - sem custo antes ou depois) para solicitar a inclusão do ativo na lista.
                     </TableFooterText>
                 </VotesContainer>
             </VotesToStudyContent>

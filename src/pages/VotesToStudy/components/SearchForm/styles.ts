@@ -27,17 +27,18 @@ export const SearchFormContainer = styled.form`
         gap: 0.75rem;
 
         padding: 1rem;
-        background: transparent;
-        border: 1px solid ${props => props.theme["green-500"]};
-        color: ${props => props.theme["gray-500"]};
+        border: 1px solid ${props => props.theme["gray-500"]};
+        background: ${props => props.theme["gray-600"]};
+        color: ${props => props.theme.white};
         font-weight: bold;
         border-radius: 6px;
+        cursor: not-allowed;
 
         transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 
         &:hover {
-            background: ${props => props.theme["green-100"]};
-            color: ${props => props.theme.white};
+            background: transparent;
+            color: ${props => props.theme["gray-500"]};
         }
     }
 `;

@@ -32,13 +32,12 @@ export const VotesTable = styled.table`
     th {
         color: ${props => props.theme["gray-100"]};
         font-weight: bold;
-        padding: 1rem 2rem 0;
+        padding: 1rem 1.75rem 0;
         text-align: left;
-        line-height: 1.5rem;
     }
 
     td {
-        padding: 1rem 2rem;
+        padding: 1rem 1.75rem;
         border: 0;
         background: ${props => props.theme["gray-600"]};
         font-weight: normal;
@@ -63,12 +62,13 @@ export const VotesTable = styled.table`
         }
 
         button {
-            padding: 0.25rem 0.75rem;
+            padding: 0.4rem 0.75rem;
             border: 1px solid ${props => props.theme["orange-btc"]};
             border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s;
             font-weight: bold;
+            font-size: 0.875rem;
 
             background: transparent;
             color: ${props => props.theme["gray-100"]};
