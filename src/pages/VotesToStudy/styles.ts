@@ -80,6 +80,10 @@ export const VotesTable = styled.table`
         }
     }
 
+    td + td {
+        border-left: 1px solid ${props => props.theme["gray-800"]};
+    }
+
     @media (max-width: 768px) {
         th:nth-child(2) {
             display: none;
