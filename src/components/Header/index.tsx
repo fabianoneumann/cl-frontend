@@ -12,51 +12,78 @@ import {
     HeaderXIcon,
     LoginButton
 } from "./styles";
+import { LoginModal } from "../auth/LoginModal";
+import { RegisterModal } from "../auth/RegisterModal";
+import { ResetPasswordModal } from "../auth/ResetPasswordModal";
 
 export function Header() {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isMenuOpen, setisMenuOpen] = useState(false);
+    const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+    const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
+    const [isResetPasswordModalOpen, setResetPasswordModalOpen] = useState(false);
 
     function handleOpenMenu() {
-        setIsOpen((prevState) => !prevState);
+        setisMenuOpen((prevState) => !prevState);
+        setLoginModalOpen(false);
+        setRegisterModalOpen(false);
+        setResetPasswordModalOpen(false);
     }
 
-    function handleLoginClick() {
-        console.log('Login');
-        if (isOpen) {
-            setIsOpen(false);
+    function handleHeaderConnectButtonClick() {
+        if (isMenuOpen) {
+            setisMenuOpen(false);
         }
+
+        setLoginModalOpen(true);
     }
 
     return (
-        <HeaderCointainer>
-            <HeaderContent>
-                <HeaderMenuMobileButton onClick={handleOpenMenu}>
-                    { isOpen
-                        ? <HeaderXIcon />
-                        : <HeaderListIcon />
+        <>
+            <HeaderCointainer>
+                <HeaderContent>
+                    <HeaderMenuMobileButton onClick={handleOpenMenu}>
+                        { isMenuOpen
+                            ? <HeaderXIcon />
+                            : <HeaderListIcon />
+                        }
+                    </HeaderMenuMobileButton>
+                    { isMenuOpen && 
+                        <HeaderMenuMobile>
+                            <NavLink onClick={handleOpenMenu} to="/cl-frontend/">Cripto Lucrativo</NavLink>
+                            <NavLink onClick={handleOpenMenu} to="/cl-web3-dev">CL Web3 Dev</NavLink>
+                            <NavLink onClick={handleOpenMenu} to="/boletim-cl">Boletim CL</NavLink>
+                            <NavLink onClick={handleOpenMenu} to="/livros">Livros</NavLink>
+                            <NavLink onClick={handleOpenMenu} to="/votos-da-semana">Votos Semanais</NavLink>
+                            <NavLink onClick={handleOpenMenu} to="/aulas">Aulas</NavLink>
+                        </HeaderMenuMobile>
                     }
-                </HeaderMenuMobileButton>
-                { isOpen && 
-                    <HeaderMenuMobile>
-                        <NavLink onClick={handleOpenMenu} to="/cl-frontend/">Cripto Lucrativo</NavLink>
-                        <NavLink onClick={handleOpenMenu} to="/cl-web3-dev">CL Web3 Dev</NavLink>
-                        <NavLink onClick={handleOpenMenu} to="/boletim-cl">Boletim CL</NavLink>
-                        <NavLink onClick={handleOpenMenu} to="/livros">Livros</NavLink>
-                        <NavLink onClick={handleOpenMenu} to="/votos-da-semana">Votos Semanais</NavLink>
-                        <NavLink onClick={handleOpenMenu} to="/aulas">Aulas</NavLink>
-                    </HeaderMenuMobile>
-                }
-                <HeaderLogo to="/cl-frontend/">Cripto Lucrativo</HeaderLogo>
-                <HeaderMenu>
-                    <NavLink to="/cl-web3-dev">CL Web3 Dev</NavLink>
-                    <NavLink to="/boletim-cl">Boletim CL</NavLink>
-                    <NavLink to="/livros">Livros</NavLink>
-                    <NavLink to="/votos-da-semana">Votos Semanais</NavLink>
-                    <NavLink to="/aulas">Aulas</NavLink>
-                    <NavLink to="/aulas" style={{ display: 'none' }}>Aulas</NavLink>
-                </HeaderMenu>
-                <LoginButton to="/cl-frontend/" onClick={handleLoginClick}>Entrar</LoginButton>
-            </HeaderContent>
-        </HeaderCointainer>
+                    <HeaderLogo to="/cl-frontend/">Cripto Lucrativo</HeaderLogo>
+                    <HeaderMenu>
+                        <NavLink to="/cl-web3-dev">CL Web3 Dev</NavLink>
+                        <NavLink to="/boletim-cl">Boletim CL</NavLink>
+                        <NavLink to="/livros">Livros</NavLink>
+                        <NavLink to="/votos-da-semana">Votos Semanais</NavLink>
+                        <NavLink to="/aulas">Aulas</NavLink>
+                        <NavLink to="/aulas" style={{ display: 'none' }}>Aulas</NavLink>
+                    </HeaderMenu>
+                    <LoginButton onClick={handleHeaderConnectButtonClick}>Conectar</LoginButton>
+                </HeaderContent>
+            </HeaderCointainer>
+            <LoginModal
+                isLoginModalOpen={isLoginModalOpen} 
+                setLoginModalOpen={setLoginModalOpen} 
+                setRegisterModalOpen={setRegisterModalOpen}
+                setResetPasswordModalOpen={setResetPasswordModalOpen}
+            />
+            <RegisterModal
+                isRegisterModalOpen={isRegisterModalOpen}
+                setLoginModalOpen={setLoginModalOpen}
+                setRegisterModalOpen={setRegisterModalOpen}
+            />
+            <ResetPasswordModal
+                isResetPasswordModalOpen={isResetPasswordModalOpen}
+                setResetPasswordModalOpen={setResetPasswordModalOpen}
+            />
+        </>
     )
 }
