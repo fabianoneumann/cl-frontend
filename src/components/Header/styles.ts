@@ -70,7 +70,7 @@ export const HeaderMenu = styled.div`
     }
 `;
 
-export const LoginButton = styled.div`
+export const AuthButton = styled.div`
     display: flex;
     align-items: center;
     text-decoration: none;

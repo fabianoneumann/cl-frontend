@@ -5,6 +5,7 @@ import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from "../../Form";
 import { AuthContext } from "../../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface LoginModalProps {
     isLoginModalOpen: boolean;
@@ -31,18 +32,30 @@ export function LoginModal({
     }: LoginModalProps) {
     const modalRef = useRef<HTMLDivElement>(null);
     
-    const loginForm = useForm<LoginFormData>({
+    const  loginForm = useForm<LoginFormData>({
         resolver: zodResolver(loginFormSchema)
     });
 
-    const { handleSubmit } = loginForm;
+    const { handleSubmit, reset } = loginForm;
 
-    const { handleLogin } = useContext(AuthContext);
+    const { handleLogin, error } = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     async function authenticateUser({ email, password }: LoginFormData) {
+        //TODO: CHECK ERROR HANDLING PATTERN STRATEGY
         await handleLogin(email, password);
-        //handleLogin function should call redirect inside it if needed, so no need to call it here
+        const error = await handleLogin(email, password);
+
+        if (error !== undefined) {
+            return;
+        }
+
         setLoginModalOpen(false);
+
+        reset({email: '', password: ''});
+
+        navigate('/votos-da-semana');
     }
 
     useEffect(() => {
@@ -80,6 +93,7 @@ export function LoginModal({
                 <LoginModalContainer ref={modalRef}>
                     <FormProvider {...loginForm}>
                         <LoginForm onSubmit={handleSubmit(authenticateUser)}>
+                            {error && <span>{error}</span>}
                             <Form.Field>
                                 <Form.Label htmlFor="email">E-mail</Form.Label>
                                 <Form.Input

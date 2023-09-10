@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
+import { AxiosError } from "axios";
 
 export function useAuth() {
     const [ authenticated, setAuthenticated ] = useState(false);
     const [ loading, setLoading ] = useState(true);
+    const [ error, setError ] = useState<string | undefined>(undefined);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -17,23 +19,31 @@ export function useAuth() {
     }, []);
 
     async function handleLogin(email: string, password: string) {
-        await api.post('auth/login', {
-            email,
-            password,
-        }).then(response => {
-            if (response.status !== 200) {
-                console.log(response);
+        try {
+            const response = await api.post('auth/login', {
+                email,
+                password,
+            });
+                const { token } = response.data;
+                // Cookies.set('refreshToken', response.headers['refreshToken'], { expires: refreshToken.sign.expiresIn });
+    
+                localStorage.setItem("token", JSON.stringify(token));
+                api.defaults.headers.Authorization = `Bearer ${token}`;
+                setAuthenticated(true);
+                setError(undefined);
                 return;
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                const message = error.response?.data.message;
+                setError(message || "Erro ao fazer login");
+            } else {
+                setError("Erro ao fazer login");
             }
 
-            const { token } = response.data;
-            // Cookies.set('refreshToken', response.headers['refreshToken'], { expires: refreshToken.sign.expiresIn });
-
-            localStorage.setItem("token", JSON.stringify(token));
-            api.defaults.headers.Authorization = `Bearer ${token}`;
-            setAuthenticated(true);
-            //TODO: redirect to dashboard
-        });
+            return error as string | undefined;
+        }
+        
+        return error;
     }
 
     // async function handleRefreshToken() {
@@ -69,5 +79,5 @@ export function useAuth() {
         delete api.defaults.headers.Authorization;
     }
 
-    return { authenticated, loading, handleLogin, handleLogout };
+    return { authenticated, loading, error, handleLogin, handleLogout };
 }

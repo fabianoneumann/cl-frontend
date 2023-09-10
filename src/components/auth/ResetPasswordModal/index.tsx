@@ -28,12 +28,13 @@ export function ResetPasswordModal({
         resolver: zodResolver(resetPasswordFormSchema)
     });
 
-    const { handleSubmit } = resetPasswordForm;
+    const { handleSubmit, reset } = resetPasswordForm;
 
     const [ output, setOutput ] = useState('');
 
     function resetPassword(data: ResetPasswordFormData) {
         setOutput(JSON.stringify(data, null, 2));
+        reset({email: ''});
     }
 
     useEffect(() => {

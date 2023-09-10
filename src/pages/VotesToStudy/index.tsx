@@ -15,7 +15,6 @@ interface Vote {
     voteCount: number;
 }
 
-//I want to to handle if the user is authenticated with the AuthContext
 export function VotesToStudy() {
     const [availableVotes, setAvailableVotes] = useState(5);
     const totalVotes = 1000;
@@ -118,11 +117,11 @@ export function VotesToStudy() {
                                     </td>
                                     <td width="45%">{vote.altcoin.name}</td>
                                     <td>{vote.voteCount}</td>
-                                    <td>{authenticated 
-                                            ? <button onClick={() => handleVote(vote)}>Votar</button> 
-                                            : <button onClick={() => alert('Conecte-se para votar')}>Votar</button>
-                                        }
-                                    </td>
+                                    {authenticated 
+                                        ? <td><button onClick={() => handleVote(vote)}>Votar</button></td>
+                                        : <td><button onClick={() => alert('Conecte-se para votar')}>Votar</button></td>
+                                    }
+                                    
                                 </tr>
                             ))}                            
                         </tbody>

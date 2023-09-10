@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 
 import { NavLink } from "react-router-dom";
 import { 
@@ -10,17 +10,26 @@ import {
     HeaderMenuMobile,
     HeaderMenuMobileButton,
     HeaderXIcon,
-    LoginButton
+    AuthButton
 } from "./styles";
 import { LoginModal } from "../auth/LoginModal";
 import { RegisterModal } from "../auth/RegisterModal";
 import { ResetPasswordModal } from "../auth/ResetPasswordModal";
+import { AuthContext } from "../../Context/AuthContext";
 
 export function Header() {
     const [isMenuOpen, setisMenuOpen] = useState(false);
     const [isLoginModalOpen, setLoginModalOpen] = useState(false);
     const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
     const [isResetPasswordModalOpen, setResetPasswordModalOpen] = useState(false);
+
+    const { authenticated, handleLogout } = useContext(AuthContext);
+
+    const [isAuthenticated, setIsAuthenticated] = useState(authenticated);
+
+    useEffect(() => {
+        setIsAuthenticated(authenticated);
+    }, [authenticated])
 
     function handleOpenMenu() {
         setisMenuOpen((prevState) => !prevState);
@@ -35,6 +44,16 @@ export function Header() {
         }
 
         setLoginModalOpen(true);
+    }
+
+    function handleHeaderLogoutButtonClick() {
+        if (isMenuOpen) {
+            setisMenuOpen(false);
+        }
+
+        handleLogout();
+
+        setIsAuthenticated(false);
     }
 
     return (
@@ -54,7 +73,7 @@ export function Header() {
                             <NavLink onClick={handleOpenMenu} to="/boletim-cl">Boletim CL</NavLink>
                             <NavLink onClick={handleOpenMenu} to="/livros">Livros</NavLink>
                             <NavLink onClick={handleOpenMenu} to="/votos-da-semana">Votos Semanais</NavLink>
-                            <NavLink onClick={handleOpenMenu} to="/aulas">Aulas</NavLink>
+                            { isAuthenticated && <NavLink onClick={handleOpenMenu} to="/aulas">Aulas</NavLink> }
                         </HeaderMenuMobile>
                     }
                     <HeaderLogo to="/cl-frontend/">Cripto Lucrativo</HeaderLogo>
@@ -63,10 +82,12 @@ export function Header() {
                         <NavLink to="/boletim-cl">Boletim CL</NavLink>
                         <NavLink to="/livros">Livros</NavLink>
                         <NavLink to="/votos-da-semana">Votos Semanais</NavLink>
-                        <NavLink to="/aulas">Aulas</NavLink>
-                        <NavLink to="/aulas" style={{ display: 'none' }}>Aulas</NavLink>
+                        { isAuthenticated && <NavLink to="/aulas">Aulas</NavLink> }
                     </HeaderMenu>
-                    <LoginButton onClick={handleHeaderConnectButtonClick}>Conectar</LoginButton>
+                    { isAuthenticated
+                        ? <AuthButton onClick={handleHeaderLogoutButtonClick}>Sair</AuthButton>
+                        : <AuthButton onClick={handleHeaderConnectButtonClick}>Conectar</AuthButton>
+                    }
                 </HeaderContent>
             </HeaderCointainer>
             <LoginModal

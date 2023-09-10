@@ -46,6 +46,12 @@ export const LoginForm = styled.form`
         }
     }
 
+    span {
+        color: ${props => props.theme["red-300"]};
+        /* font-size: 0.875rem; */
+        align-self: center;
+    }
+
     a {
         align-self: center;
         font-size: 0.75rem;

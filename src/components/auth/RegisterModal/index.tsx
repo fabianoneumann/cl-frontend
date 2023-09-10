@@ -33,12 +33,13 @@ export function RegisterModal({
         resolver: zodResolver(registerFormSchema)
     });
 
-    const { handleSubmit } = registerForm;
+    const { handleSubmit, reset } = registerForm;
 
     const [ output, setOutput ] = useState('');
 
     function registerUser(data: RegisterFormData) {
         setOutput(JSON.stringify(data, null, 2));
+        reset({username: '', email: '', password: ''});
     }
 
     useEffect(() => {
