@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useContext } from "react";
 import { LoginModalBackground, LoginModalContainer, LoginForm, RegisterSection } from "./styles";
 import { useForm, FormProvider } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from "../../Form";
+import { AuthContext } from "../../../Context/AuthContext";
 
 interface LoginModalProps {
     isLoginModalOpen: boolean;
@@ -36,10 +37,12 @@ export function LoginModal({
 
     const { handleSubmit } = loginForm;
 
-    const [ output, setOutput ] = useState('');
+    const { handleLogin } = useContext(AuthContext);
 
-    function authenticateUser(data: LoginFormData) {
-        setOutput(JSON.stringify(data, null, 2));
+    async function authenticateUser({ email, password }: LoginFormData) {
+        await handleLogin(email, password);
+        //handleLogin function should call redirect inside it if needed, so no need to call it here
+        setLoginModalOpen(false);
     }
 
     useEffect(() => {
@@ -83,6 +86,7 @@ export function LoginModal({
                                     type="email"
                                     name="email"
                                     placeholder="E-mail"
+                                    autoComplete="email"
                                 />
                                 <Form.ErrorMessage field="email" />
                             </Form.Field>
@@ -93,6 +97,7 @@ export function LoginModal({
                                     type="password"
                                     name="password"
                                     placeholder="Senha"
+                                    autoComplete="off"
                                 />
                                 <Form.ErrorMessage field="password" />
                             </Form.Field>
@@ -104,8 +109,6 @@ export function LoginModal({
                             </a> 
                         </LoginForm>
                     </FormProvider>
-
-                    <pre>{output}</pre>
 
                     <RegisterSection>
                         <span>Não possui conta?</span>

@@ -2,10 +2,7 @@ import styled from "styled-components";
 
 export const LoginModalBackground = styled.div`
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background-color: rgb(0,0,0, 0.75);
     z-index: 5;
     transition: all 0.5s;

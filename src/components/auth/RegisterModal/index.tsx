@@ -76,6 +76,7 @@ export function RegisterModal({
                                     type="text"
                                     name="username"
                                     placeholder="Nome de usuário"
+                                    autoComplete="username"
                                 />
                                 <Form.ErrorMessage field="username" />
                             </Form.Field>
@@ -86,6 +87,7 @@ export function RegisterModal({
                                     type="email"
                                     name="email"
                                     placeholder="E-mail"
+                                    autoComplete="email"
                                 />
                                 <Form.ErrorMessage field="email" />
                             </Form.Field>
@@ -96,6 +98,7 @@ export function RegisterModal({
                                     type="password"
                                     name="password"
                                     placeholder="Senha"
+                                    autoComplete="off"
                                 />
                                 <Form.ErrorMessage field="password" />
                             </Form.Field>

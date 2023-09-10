@@ -67,6 +67,7 @@ export function ResetPasswordModal({
                                     type="email"
                                     name="email"
                                     placeholder="E-mail"
+                                    autoComplete="email"
                                 />
                                 <Form.ErrorMessage field="email" />
                             </Form.Field>
