@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { VotesSummary } from "../../components/VotesSummary";
 import { TableFooterText, VotesContainer, VotesTable, VotesToStudyContainer, VotesToStudyContent, VotesToStudyTitle } from "./styles";
 import { SearchForm } from "./components/SearchForm";
@@ -17,21 +17,50 @@ interface Vote {
 
 export function VotesToStudy() {
     const [availableVotes, setAvailableVotes] = useState(5);
-    const totalVotes = 1000;
-    const weeklyVotes = 100;
+    const totalVotesRef = useRef<number>(0);
+    const weeklyVotesRef = useRef<number>(0);
 
-    let totalVotesToDisplay = totalVotes + 5 - availableVotes;
-    let weeklyVotesToDisplay = weeklyVotes + 5 - availableVotes;
+    // let totalVotesToDisplay = totalVotes + 5 - availableVotes;
+    // let weeklyVotesToDisplay = weeklyVotes + 5 - availableVotes;
 
     const [fetchedVotes, setFetchedVotes] = useState<Vote[]>([]);
 
     const [votes, setVotes] = useState<Vote[]>([]);
 
+    const { authenticated } = useContext(AuthContext);
+
+    useEffect(() => {
+        api.get('/votes/counters')
+            .then(response => {
+                const { voteCounters } = response.data;
+                totalVotesRef.current = voteCounters.totalCount;
+                weeklyVotesRef.current = voteCounters.weekCount;
+            });
+
+        api.get('votes/current-week')
+            .then(response => {
+                setFetchedVotes(response.data.votes);
+                setVotes(response.data.votes);
+            });
+        
+    }, []);
+
+    useEffect(() => {
+        if (authenticated) {
+            api.get('/votes/user/current-week-count')
+                .then(response => {
+                    setAvailableVotes(5 - response.data.votesCount);
+                });
+        } else {
+            setAvailableVotes(5);
+        }
+    }, [authenticated]);
+
     const handleVote = (vote: Vote) => {
         if (availableVotes > 0) {
             setAvailableVotes(availableVotes - 1);
-            totalVotesToDisplay += 1;
-            weeklyVotesToDisplay += 1;
+            totalVotesRef.current += 1;
+            weeklyVotesRef.current += 1;
 
             const updatedVoteListToShow = votes.map((item) => {
                 if (item.altcoin.ticker === vote.altcoin.ticker) {
@@ -75,23 +104,13 @@ export function VotesToStudy() {
         }
     }
 
-    useEffect(() => {
-        api.get('votes/current-week')
-            .then(response => {
-                setFetchedVotes(response.data.votes);
-                setVotes(response.data.votes);
-            });
-    }, []);
-
-    const { authenticated } = useContext(AuthContext);
-
     return (
         <VotesToStudyContainer>
             <VotesToStudyContent>
                 <VotesToStudyTitle>Votos da Semana</VotesToStudyTitle>
                 <VotesSummary 
-                    totalVotes={totalVotesToDisplay}
-                    weeklyVotes={weeklyVotesToDisplay}
+                    totalVotes={totalVotesRef.current}
+                    weeklyVotes={weeklyVotesRef.current}
                     availableVotes={availableVotes}
                 />
 
