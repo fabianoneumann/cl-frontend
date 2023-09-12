@@ -58,33 +58,44 @@ export function VotesToStudy() {
 
     const handleVote = (vote: Vote) => {
         if (availableVotes > 0) {
-            setAvailableVotes(availableVotes - 1);
-            totalVotesRef.current += 1;
-            weeklyVotesRef.current += 1;
-
-            const updatedVoteListToShow = votes.map((item) => {
-                if (item.altcoin.ticker === vote.altcoin.ticker) {
-                    return {
-                        ...item,
-                        voteCount: item.voteCount + 1,
-                    }
+            api.post('/votes', {
+                altcoinId: vote.altcoin.id,
+            }).then(response => {
+                if (response.status !== 201) {
+                    alert('Erro ao computar voto!');
+                    return;
                 }
-                return item;
-            });
-            setVotes(updatedVoteListToShow);
 
-            const updatedVoteList = fetchedVotes.map((item) => {
-                if (item.altcoin.ticker === vote.altcoin.ticker) {
-                    return {
-                        ...item,
-                        voteCount: item.voteCount + 1,
+                setAvailableVotes(availableVotes - 1);
+                totalVotesRef.current += 1;
+                weeklyVotesRef.current += 1;
+
+                const updatedVoteListToShow = votes.map((item) => {
+                    if (item.altcoin.ticker === vote.altcoin.ticker) {
+                        return {
+                            ...item,
+                            voteCount: item.voteCount + 1,
+                        }
                     }
-                }
-                return item;
-            });
-            setFetchedVotes(updatedVoteList);
+                    return item;
+                });
+                setVotes(updatedVoteListToShow);
 
-            alert('Voto computado com sucesso!');
+                const updatedVoteList = fetchedVotes.map((item) => {
+                    if (item.altcoin.ticker === vote.altcoin.ticker) {
+                        return {
+                            ...item,
+                            voteCount: item.voteCount + 1,
+                        }
+                    }
+                    return item;
+                });
+                setFetchedVotes(updatedVoteList);
+
+                alert('Voto computado com sucesso!');
+            }).catch(error => {
+                alert('Erro ao computar voto: ' + error.message);
+            });
         } else if (availableVotes === 0) {
             alert('Você não tem mais votos disponíveis!');
         }

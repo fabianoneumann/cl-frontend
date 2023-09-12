@@ -3,6 +3,7 @@ import { LandingPage } from './pages/LandingPage';
 import { VotesToStudy } from './pages/VotesToStudy';
 import { DefaultLayout } from './layouts/DefaultLayout';
 import { PageNotFound } from './pages/PageNotFound';
+import { AccountActivation } from './pages/AccountActivation';
 // import { useContext } from 'react';
 
 
@@ -28,6 +29,7 @@ export function Router() {
             <Route path="/" element={<DefaultLayout />} >
                 <Route path="/cl-frontend/" element={<LandingPage />} />
                 <Route path="/votos-da-semana" element={<VotesToStudy />} />
+                <Route path="/users/activate/:token" element={<AccountActivation />} />
 
                 <Route path="*" element={<PageNotFound />} />
             </Route>
