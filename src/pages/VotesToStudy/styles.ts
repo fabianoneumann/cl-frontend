@@ -78,6 +78,16 @@ export const VotesTable = styled.table`
                 color: ${props => props.theme["gray-900"]};
             }
         }
+
+        @media (max-width: 768px) {
+            &:first-child {
+                padding: 1rem 0.75rem;
+            }
+
+            &:last-child {
+                padding: 1rem 0.75rem;
+            }
+        }
     }
 
     td + td {

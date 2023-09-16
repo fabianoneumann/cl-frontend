@@ -3,12 +3,13 @@ import { useAuth } from "./hooks/useAuth";
 
 type AuthContextType = {
     authenticated: boolean;
+    setAuthenticated: (value: boolean) => void;
     loading: boolean;
     error: string | undefined;
     handleLogin: (
       email: string, 
       password: string,
-    ) => Promise<string | undefined>;
+    ) => Promise<void>;
     handleLogout: () => void;
 }
 
@@ -20,7 +21,7 @@ export const AuthContext = createContext({} as AuthContextType);
 
 export function AuthProvider({ children }: AuthProviderProps) {
     const {
-      authenticated, loading, error, handleLogin, handleLogout,
+      authenticated, setAuthenticated, loading, error, handleLogin, handleLogout,
     } = useAuth();
 
     const handleLoginSubmit = async (
@@ -31,7 +32,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       };
   
     return (
-      <AuthContext.Provider value={{ authenticated, loading, error, handleLogin: handleLoginSubmit, handleLogout }}>
+      <AuthContext.Provider value={{ authenticated, setAuthenticated, loading, error, handleLogin: handleLoginSubmit, handleLogout }}>
         {children}
       </AuthContext.Provider>
     );

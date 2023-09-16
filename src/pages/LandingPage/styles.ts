@@ -122,6 +122,12 @@ export const LandingPageSectionTitle = styled.h1`
     margin-bottom: 1rem;
     margin-top: 4.5rem;
     text-align: center;
+
+    @media (max-width: 768px) {
+        font-size: 2.5rem;
+        line-height: 3rem;
+        margin-top: 2rem;
+    }
 `;
 
 export const LandingPageSectionSubtitle = styled(LandingPageSectionTitle)`
@@ -132,6 +138,11 @@ export const LandingPageSectionSubtitle = styled(LandingPageSectionTitle)`
 
     span {
         color: ${props => props.theme['pink-400']};
+    }
+
+    @media (max-width: 768px) {
+        font-size: 2rem;
+        line-height: 2.5rem;
     }
 `;
 

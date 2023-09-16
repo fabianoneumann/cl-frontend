@@ -43,19 +43,17 @@ export function LoginModal({
     const navigate = useNavigate();
 
     async function authenticateUser({ email, password }: LoginFormData) {
-        //TODO: CHECK ERROR HANDLING PATTERN STRATEGY
-        await handleLogin(email, password);
-        const error = await handleLogin(email, password);
+        //TODO: CHECK ACTIVATION STATUS AND REDIRECT TO ACTIVATE YOUR ACCOUNT PAGE IF NOT ACTIVATED
+        //TODO: CHECK IF IT'S POSSIBLE TO USE ERROR FROM CONTEXT WITHOU LOGIN ERROR - TRY CATCH?
+        try {
+            await handleLogin(email, password);
 
-        if (error !== undefined) {
-            return;
+            setLoginModalOpen(false);
+            navigate('/votes-of-the-week');
+            reset({email: '', password: ''});
+        } catch (error) {
+            // The error message is being set in the handleLogin function
         }
-
-        setLoginModalOpen(false);
-
-        reset({email: '', password: ''});
-
-        navigate('/votos-da-semana');
     }
 
     useEffect(() => {

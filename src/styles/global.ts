@@ -25,4 +25,10 @@ export const GlobalStyle = createGlobalStyle`
     body, input, textarea, button {
         font: 400 1rem 'Roboto', sans-serif;
     }
+
+    @media (max-width: 768px) {
+        html {
+            font-size: 87.5%;
+        }
+    }
 `;

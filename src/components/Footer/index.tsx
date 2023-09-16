@@ -22,11 +22,11 @@ export function Footer() {
                     <FooterColumn>
                         <span>Projetos:</span>
                         <nav>
-                            <NavLink to="/cl-frontend/" title="Comunidde CL">Comunidade CL</NavLink>
+                            <NavLink to="/" title="Comunidde CL">Comunidade CL</NavLink>
                             <NavLink to="/cl-web3-dev" title="CL Dev Web3">CL Dev Web3</NavLink>
                             <NavLink to="/boletim-cl" title="Boletim CL">Boletim CL</NavLink>
                             <NavLink to="/livros" title="Livros">Livros</NavLink>
-                            <NavLink to="/votos-da-semana" title="Votos da Semana">Votos da Semana</NavLink>
+                            <NavLink to="/votes-of-the-week" title="Votos da Semana">Votos da Semana</NavLink>
                             <NavLink to="/aulas" title="Aulas">Aulas</NavLink>
                         </nav>
                     </FooterColumn>

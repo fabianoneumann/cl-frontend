@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 
 import { NavLink } from "react-router-dom";
 import { 
@@ -23,13 +23,7 @@ export function Header() {
     const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
     const [isResetPasswordModalOpen, setResetPasswordModalOpen] = useState(false);
 
-    const { authenticated, handleLogout } = useContext(AuthContext);
-
-    const [isAuthenticated, setIsAuthenticated] = useState(authenticated);
-
-    useEffect(() => {
-        setIsAuthenticated(authenticated);
-    }, [authenticated])
+    const { authenticated, setAuthenticated, handleLogout } = useContext(AuthContext);
 
     function handleOpenMenu() {
         setisMenuOpen((prevState) => !prevState);
@@ -53,7 +47,7 @@ export function Header() {
 
         handleLogout();
 
-        setIsAuthenticated(false);
+        setAuthenticated(false);
     }
 
     return (
@@ -68,23 +62,23 @@ export function Header() {
                     </HeaderMenuMobileButton>
                     { isMenuOpen && 
                         <HeaderMenuMobile>
-                            <NavLink onClick={handleOpenMenu} to="/cl-frontend/">Cripto Lucrativo</NavLink>
+                            <NavLink onClick={handleOpenMenu} to="/">Cripto Lucrativo</NavLink>
                             <NavLink onClick={handleOpenMenu} to="/cl-web3-dev">CL Web3 Dev</NavLink>
                             <NavLink onClick={handleOpenMenu} to="/boletim-cl">Boletim CL</NavLink>
                             <NavLink onClick={handleOpenMenu} to="/livros">Livros</NavLink>
-                            <NavLink onClick={handleOpenMenu} to="/votos-da-semana">Votos Semanais</NavLink>
-                            { isAuthenticated && <NavLink onClick={handleOpenMenu} to="/aulas">Aulas</NavLink> }
+                            <NavLink onClick={handleOpenMenu} to="/votes-of-the-week">Votos Semanais</NavLink>
+                            { authenticated && <NavLink onClick={handleOpenMenu} to="/aulas">Aulas</NavLink> }
                         </HeaderMenuMobile>
                     }
-                    <HeaderLogo to="/cl-frontend/">Cripto Lucrativo</HeaderLogo>
+                    <HeaderLogo to="/">Cripto Lucrativo</HeaderLogo>
                     <HeaderMenu>
                         <NavLink to="/cl-web3-dev">CL Web3 Dev</NavLink>
                         <NavLink to="/boletim-cl">Boletim CL</NavLink>
                         <NavLink to="/livros">Livros</NavLink>
-                        <NavLink to="/votos-da-semana">Votos Semanais</NavLink>
-                        { isAuthenticated && <NavLink to="/aulas">Aulas</NavLink> }
+                        <NavLink to="/votes-of-the-week">Votos Semanais</NavLink>
+                        { authenticated && <NavLink to="/aulas">Aulas</NavLink> }
                     </HeaderMenu>
-                    { isAuthenticated
+                    { authenticated
                         ? <AuthButton onClick={handleHeaderLogoutButtonClick}>Sair</AuthButton>
                         : <AuthButton onClick={handleHeaderConnectButtonClick}>Conectar</AuthButton>
                     }

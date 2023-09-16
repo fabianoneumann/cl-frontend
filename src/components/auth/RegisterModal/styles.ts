@@ -30,6 +30,12 @@ export const RegisterForm = styled.form`
     min-width: 18rem;
     gap: 1rem;
 
+    span {
+        color: ${props => props.theme["red-300"]};
+        align-self: center;
+        max-width: 18rem;
+    }
+
     button {
         height: 2.375rem;
         background: ${props => props.theme["pink-700"]};

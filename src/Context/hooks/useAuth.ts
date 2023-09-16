@@ -6,6 +6,8 @@ export function useAuth() {
     const [ authenticated, setAuthenticated ] = useState(false);
     const [ loading, setLoading ] = useState(true);
     const [ error, setError ] = useState<string | undefined>(undefined);
+    //TODO: Refactor to remove error and use toast instead
+    // use a custom hook to handle errors
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -24,26 +26,25 @@ export function useAuth() {
                 email,
                 password,
             });
-                const { token } = response.data;
-                // Cookies.set('refreshToken', response.headers['refreshToken'], { expires: refreshToken.sign.expiresIn });
+            
+            const { token } = response.data;
+            // TODO: adicionar o token da resposta no cookie do navegador
+            // Cookies.set('refreshToken', response.headers['refreshToken'], { expires: refreshToken.sign.expiresIn });
     
-                localStorage.setItem("token", JSON.stringify(token));
-                api.defaults.headers.Authorization = `Bearer ${token}`;
-                setAuthenticated(true);
-                setError(undefined);
-                return;
+            localStorage.setItem("token", JSON.stringify(token));
+            api.defaults.headers.Authorization = `Bearer ${token}`;
+            setAuthenticated(true);
+            setError(undefined);
         } catch (error) {
             if (error instanceof AxiosError) {
                 const message = error.response?.data.message;
                 setError(message || "Erro ao fazer login");
+                throw new Error(message || "Erro ao fazer login");
             } else {
                 setError("Erro ao fazer login");
+                throw new Error("Erro ao fazer login");
             }
-
-            return error as string | undefined;
         }
-        
-        return error;
     }
 
     // async function handleRefreshToken() {
@@ -79,5 +80,5 @@ export function useAuth() {
         delete api.defaults.headers.Authorization;
     }
 
-    return { authenticated, loading, error, handleLogin, handleLogout };
+    return { authenticated, setAuthenticated, loading, error, handleLogin, handleLogout };
 }

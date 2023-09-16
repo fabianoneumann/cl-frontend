@@ -20,9 +20,6 @@ export function VotesToStudy() {
     const totalVotesRef = useRef<number>(0);
     const weeklyVotesRef = useRef<number>(0);
 
-    // let totalVotesToDisplay = totalVotes + 5 - availableVotes;
-    // let weeklyVotesToDisplay = weeklyVotes + 5 - availableVotes;
-
     const [fetchedVotes, setFetchedVotes] = useState<Vote[]>([]);
 
     const [votes, setVotes] = useState<Vote[]>([]);
@@ -147,22 +144,22 @@ export function VotesToStudy() {
                                     </td>
                                     <td width="45%">{vote.altcoin.name}</td>
                                     <td>{vote.voteCount}</td>
-                                    {authenticated 
-                                        ? <td><button onClick={() => handleVote(vote)}>Votar</button></td>
-                                        : <td><button onClick={() => alert('Conecte-se para votar')}>Votar</button></td>
-                                    }
-                                    
+
+                                    <td>{ authenticated 
+                                        ? <button onClick={() => handleVote(vote)}>Votar</button>
+                                        : <button onClick={() => alert('Conecte-se para votar')}>Votar</button>
+                                    }</td>          
                                 </tr>
                             ))}                            
                         </tbody>
                     </VotesTable>
                     <TableFooterText>
-                        Lista com as 20 altcoins mais votadas. 
+                        Lista com as 20 altcoins mais votadas para estudo na semana. 
                         Utilize o campo de busca para visualizar e votar em outras altcoins.
-                        Caso não encontre, entre em contato ná página de suporte (após login - sem custo antes ou depois) para solicitar a inclusão do ativo na lista.
+                        Caso não encontre, entre em contato para solicitar a inclusão do ativo na lista.
                     </TableFooterText>
                 </VotesContainer>
             </VotesToStudyContent>
         </VotesToStudyContainer>
-    )
+    );
 }

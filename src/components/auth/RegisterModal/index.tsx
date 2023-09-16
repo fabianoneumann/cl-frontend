@@ -4,6 +4,8 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoginSection, RegisterForm, RegisterModalBackground, RegisterModalContainer } from './styles';
 import { Form } from '../../Form';
+import { useNavigate } from "react-router-dom";
+import { api } from "../../../services/api";
 
 interface RegisterModalProps {
     isRegisterModalOpen: boolean;
@@ -25,7 +27,7 @@ type RegisterFormData = z.infer<typeof registerFormSchema>;
 export function RegisterModal({ 
         isRegisterModalOpen, 
         setRegisterModalOpen, 
-        setLoginModalOpen 
+        setLoginModalOpen
     }: RegisterModalProps) {
     const modalRef = useRef<HTMLDivElement>(null);
 
@@ -35,17 +37,39 @@ export function RegisterModal({
 
     const { handleSubmit, reset } = registerForm;
 
-    const [ output, setOutput ] = useState('');
+    const [ error, setError ] = useState('');
 
-    function registerUser(data: RegisterFormData) {
-        setOutput(JSON.stringify(data, null, 2));
-        reset({username: '', email: '', password: ''});
+    const navigate = useNavigate();
+
+    async function registerUser(data: RegisterFormData) {
+
+        const { username, email, password } = data;
+        
+        await api.post('users', {
+            username,
+            email,
+            password,
+        }).then(response => {
+            if (response.status !== 201) {
+                alert('Erro ao registrar usuário!');
+                return;
+            }
+
+            setRegisterModalOpen(false);
+            setError('');
+            reset({username: '', email: '', password: ''});
+            navigate('/users/activate-your-account');
+        }).catch(error => {
+            setError(error.response.data.message);
+        });
     }
 
     useEffect(() => {
         function handleOutsideClick(event: MouseEvent) {
             if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
                 setRegisterModalOpen(false);
+                setError('');
+                reset({username: '', email: '', password: ''});
             }
         }
 
@@ -58,7 +82,7 @@ export function RegisterModal({
         return () => {
             document.removeEventListener('mousedown', handleOutsideClick);
         };
-    }, [isRegisterModalOpen, setRegisterModalOpen]);
+    }, [isRegisterModalOpen, setRegisterModalOpen, setError, reset]);
 
     function handleConnectButtonClick() {
         setRegisterModalOpen(false);
@@ -71,6 +95,7 @@ export function RegisterModal({
                 <RegisterModalContainer ref={modalRef}>
                     <FormProvider {...registerForm}>
                         <RegisterForm onSubmit={handleSubmit(registerUser)}>
+                            {error && <span>{error}</span>}
                             <Form.Field>
                                 <Form.Label htmlFor="username">Nome de usuário</Form.Label>
                                 <Form.Input
@@ -107,8 +132,6 @@ export function RegisterModal({
                             <button type='submit'>Registrar</button>
                         </RegisterForm>
                     </FormProvider>
-
-                    <pre>{output}</pre>
 
                     <LoginSection>
                         <span>Já possui conta?</span>
