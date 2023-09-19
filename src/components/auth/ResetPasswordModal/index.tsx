@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { z } from "zod";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ResetPasswordForm, ResetPasswordModalBackground, ResetPasswordModalContainer } from "./styles";
 import { Form } from "../../Form";
+import { api } from "../../../services/api";
 
 interface ResetPasswordModalProps {
     isResetPasswordModalOpen: boolean;
@@ -30,10 +31,25 @@ export function ResetPasswordModal({
 
     const { handleSubmit, reset } = resetPasswordForm;
 
-    const [ output, setOutput ] = useState('');
-
     function resetPassword(data: ResetPasswordFormData) {
-        setOutput(JSON.stringify(data, null, 2));
+        const { email } = data;
+
+        api.post('/users/password-reset-request', {
+            email,
+        }).then(response => {
+            console.log(response.data);
+            
+            if (response.status !== 204) {
+                alert('Erro ao solicitar redefinição de senha!');
+                return;
+            }
+
+            alert('E-mail de redefinição de senha enviado com sucesso!');
+            setResetPasswordModalOpen(false);
+        }).catch(error => {
+            alert('Erro ao solicitar redefinição de senha: ' + error.response.data.message);
+        });
+
         reset({email: ''});
     }
 
@@ -76,8 +92,6 @@ export function ResetPasswordModal({
                             <button type="submit">Enviar e-mail</button>
                         </ResetPasswordForm>
                     </FormProvider>
-
-                    <pre>{output}</pre>
                 </ResetPasswordModalContainer>
             </ResetPasswordModalBackground>
         )

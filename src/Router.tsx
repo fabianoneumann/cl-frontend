@@ -5,7 +5,7 @@ import { DefaultLayout } from './layouts/DefaultLayout';
 import { PageNotFound } from './pages/PageNotFound';
 import { AccountActivation } from './pages/AccountActivation';
 import { ActivateYourAccount } from './pages/ActivateYourAccount';
-// import { useContext } from 'react';
+import { ResetPassword } from './pages/ResetPassword';
 
 
 // TODO: Create a PrivateRoute component when needed
@@ -33,7 +33,7 @@ export function Router() {
 
                 <Route path="/users/activate-your-account" element={<ActivateYourAccount />} />
                 <Route path="/users/activate" element={<AccountActivation />} />
-                {/* <Route path="/users/reset-password/:token" element={<ResetPassword />} /> */}
+                <Route path="/users/reset-password" element={<ResetPassword />} />
 
                 <Route path="*" element={<PageNotFound />} />
             </Route>
