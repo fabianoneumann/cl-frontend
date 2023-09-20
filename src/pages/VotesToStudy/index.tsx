@@ -4,6 +4,7 @@ import { TableFooterText, VotesContainer, VotesTable, VotesToStudyContainer, Vot
 import { SearchForm } from "./components/SearchForm";
 import { api } from "../../services/api";
 import { AuthContext } from "../../Context/AuthContext";
+import { isValidToken } from "../../utils/auth/is-valid-token";
 
 interface Vote {
     altcoin: {
@@ -43,13 +44,23 @@ export function VotesToStudy() {
     }, []);
 
     useEffect(() => {
-        if (authenticated) {
+        const token = localStorage.getItem("token");
+
+        if (authenticated && token && isValidToken(token)) {
             api.get('/votes/user/current-week-count')
                 .then(response => {
                     setAvailableVotes(5 - response.data.votesCount);
+                }).catch(error => {
+                    if (error.response.status === 404) {
+                        //handleRefreshToken();
+                    } else {
+                        throw new Error("Erro ao buscar total de votos do usuário para a semana: " + error.message);
+                    }
                 });
         } else {
-            setAvailableVotes(5);
+            //TODO: Verificar se existe um token no Cookie para chamar o habdleRefreshToken, caso contrário, setar availableVotes para 5
+            setAvailableVotes(0);
+            // handleRefreshToken();
         }
     }, [authenticated]);
 

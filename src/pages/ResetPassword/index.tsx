@@ -51,7 +51,7 @@ export function ResetPassword() {
         })
             .then(response => {
                 if (response.status !== 204) {
-                    alert('Erro ao ativar conta!');
+                    alert('Erro no reset de senha! Tente mais tarde.');
                     return;
                 }
                 
@@ -62,25 +62,6 @@ export function ResetPassword() {
             }).catch(error => {
                 alert('Erro ao ativar conta: ' + error.message);
             });
-    
-        //copirado de register user, trocar para reset password
-        // await api.post('users', {
-        //     username,
-        //     email,
-        //     password,
-        // }).then(response => {
-        //     if (response.status !== 201) {
-        //         alert('Erro ao registrar usuário!');
-        //         return;
-        //     }
-    
-        //     setRegisterModalOpen(false);
-        //     setError('');
-        //     reset({username: '', email: '', password: ''});
-        //     navigate('/users/activate-your-account');
-        // }).catch(error => {
-        //     setError(error.response.data.message);
-        // });
     
         reset({password: '', passwordConfirmation: ''});
     }

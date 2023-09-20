@@ -27,7 +27,7 @@ export const LoginModalContainer = styled.div`
 export const LoginForm = styled.form`
     display: flex;
     flex-direction: column;
-    min-width: 18rem;
+    width: 18rem;
     gap: 1rem;
 
     button {
@@ -48,8 +48,7 @@ export const LoginForm = styled.form`
 
     span {
         color: ${props => props.theme["red-300"]};
-        /* font-size: 0.875rem; */
-        align-self: center;
+        text-align: center;
     }
 
     a {

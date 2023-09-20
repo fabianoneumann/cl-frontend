@@ -39,10 +39,11 @@ export function AccountActivation() {
                 //TODO: Adicionar mensagem de sucesso em toast e
                 // adicionar timer com ícone em movimento ou alguma animação para sucesso
                 navigate('/votes-of-the-week');
-            }).catch(error => {
-                alert('Erro ao ativar conta: ' + error.message);
+            }).catch(() => {
+                alert('Seu link de ativação expirou! Por favor, tente se conectar para receber um novo link de ativação.');
+                navigate('/');
             });
-    });
+    }, [token, navigate, setAuthenticated]);
 
     return(
         <AccountActivationContainer>
