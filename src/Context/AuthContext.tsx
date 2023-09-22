@@ -10,6 +10,7 @@ type AuthContextType = {
       email: string, 
       password: string,
     ) => Promise<void>;
+    handleRefreshToken: () => Promise<void>;
     handleLogout: () => void;
 }
 
@@ -21,19 +22,32 @@ export const AuthContext = createContext({} as AuthContextType);
 
 export function AuthProvider({ children }: AuthProviderProps) {
     const {
-      authenticated, setAuthenticated, loading, error, handleLogin, handleLogout,
+      authenticated, setAuthenticated, loading, error, handleLogin, handleRefreshToken, handleLogout,
     } = useAuth();
-
+    
     const handleLoginSubmit = async (
-        email: string, 
-        password: string, 
-      ) => {
-        return await handleLogin(email, password);
-      };
+      email: string, 
+      password: string, 
+    ) => {
+      return await handleLogin(email, password);
+    };
+
+    const handleRefreshTokenSubmit = async () => {
+      return await handleRefreshToken();
+    };
   
     return (
-      <AuthContext.Provider value={{ authenticated, setAuthenticated, loading, error, handleLogin: handleLoginSubmit, handleLogout }}>
-        {children}
+      <AuthContext.Provider 
+        value={{ 
+          authenticated, 
+          setAuthenticated, 
+          loading, 
+          error, 
+          handleLogin: handleLoginSubmit, 
+          handleRefreshToken: handleRefreshTokenSubmit, 
+          handleLogout 
+        }}>
+          {children}
       </AuthContext.Provider>
     );
   }

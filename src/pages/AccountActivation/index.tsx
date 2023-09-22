@@ -1,6 +1,6 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AccountActivationContainer } from "./styles";
+import { AccountActivationContainer, AccountActivationSubtitle, AccountActivationTitle } from "./styles";
 import { api } from "../../services/api";
 import { AuthContext } from "../../Context/AuthContext";
 
@@ -18,36 +18,43 @@ export function AccountActivation() {
 
     const navigate = useNavigate();
 
+    const [isAccountActivated, setAccountActivated] = useState(false);
+
     useEffect(() => {
         //TODO: Adicionar timer com ícone em movimento ou alguma animação
 
         api.defaults.headers.Authorization = `Bearer ${token}`;
 
-        //TODO: ADD REFRESH TOKEN LOGIC
-        api.get('/users/activate')
-            .then(response => {
-                if (response.status !== 204) {
-                    alert('Erro ao ativar conta!');
-                    return;
-                }
+        setTimeout(() => {
+            api.get('/users/activate')
+                .then(response => {
+                    if (response.status !== 204) {
+                        alert('Erro ao ativar conta!');
+                        return;
+                    }
 
-                //TODO: Adicionar o token do cookie da resposta no cookie do navegador
-                // Cookies.set('refreshToken', response.headers['refreshToken'], { expires: refreshToken.sign.expiresIn });
+                    // No cookie token set - just to make user vote since it's a new account.
+                    localStorage.setItem("token", JSON.stringify(token));
 
-                localStorage.setItem("token", JSON.stringify(token));
-                setAuthenticated(true);
-                //TODO: Adicionar mensagem de sucesso em toast e
-                // adicionar timer com ícone em movimento ou alguma animação para sucesso
-                navigate('/votes-of-the-week');
-            }).catch(() => {
-                alert('Seu link de ativação expirou! Por favor, tente se conectar para receber um novo link de ativação.');
-                navigate('/');
-            });
+                    setAccountActivated(true);
+                }).catch(() => {
+                    alert('Seu link de ativação expirou! Por favor, tente se conectar para receber um novo link de ativação.');
+                    navigate('/');
+                });
+        }, 2000);
     }, [token, navigate, setAuthenticated]);
 
     return(
         <AccountActivationContainer>
-            <h1>Ativando sua conta...</h1>
+            { !isAccountActivated && 
+                <AccountActivationTitle>Ativando sua conta...</AccountActivationTitle>
+            }
+            { isAccountActivated && 
+                <>
+                    <AccountActivationTitle>Conta ativada com sucesso!</AccountActivationTitle>
+                    <AccountActivationSubtitle>Por favor, conecte-se para continuar</AccountActivationSubtitle>
+                </>
+            }
         </AccountActivationContainer>
     );
 }

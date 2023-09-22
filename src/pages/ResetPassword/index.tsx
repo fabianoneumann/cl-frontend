@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider } from "react-hook-form";
 import { z } from "zod";
 import { ResetPasswordContainer, ResetPasswordForm } from "./styles";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Form } from "../../components/Form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
@@ -23,10 +23,8 @@ export function ResetPassword() {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        //TODO: Adicionar timer com ícone em movimento ou alguma animação
-        api.defaults.headers.Authorization = `Bearer ${token}`;
-    });
+    //TODO: review necessity to use const apiPrivate = useApiPrivate(); instead of api
+    api.defaults.headers.Authorization = `Bearer ${token}`;
     
     const  resetPasswordForm = useForm<resetPasswordFormData>({
         resolver: zodResolver(resetPasswordFormSchema)

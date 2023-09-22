@@ -5,6 +5,7 @@ import { SearchForm } from "./components/SearchForm";
 import { api } from "../../services/api";
 import { AuthContext } from "../../Context/AuthContext";
 import { isValidToken } from "../../utils/auth/is-valid-token";
+import { useApiPrivate } from "../../Context/hooks/useApiPrivate";
 
 interface Vote {
     altcoin: {
@@ -25,7 +26,8 @@ export function VotesToStudy() {
 
     const [votes, setVotes] = useState<Vote[]>([]);
 
-    const { authenticated } = useContext(AuthContext);
+    const { authenticated, handleRefreshToken } = useContext(AuthContext);
+    const apiPrivate = useApiPrivate();
 
     useEffect(() => {
         api.get('/votes/counters')
@@ -44,29 +46,39 @@ export function VotesToStudy() {
     }, []);
 
     useEffect(() => {
+        let isMounted = true;
+        const controller = new AbortController();
+
         const token = localStorage.getItem("token");
 
         if (authenticated && token && isValidToken(token)) {
-            api.get('/votes/user/current-week-count')
+            apiPrivate.get('/votes/user/current-week-count', {
+                signal: controller.signal,
+            })
                 .then(response => {
-                    setAvailableVotes(5 - response.data.votesCount);
+                    isMounted && setAvailableVotes(5 - response.data.votesCount);
                 }).catch(error => {
-                    if (error.response.status === 404) {
-                        //handleRefreshToken();
+                    if (error.response && error.response.status === 401) {
+                        handleRefreshToken();
+                    } else if (error.message === 'canceled' || error.message === 'aborted') {
+                        console.log(''); //TODO: Check if this is improvable
                     } else {
                         throw new Error("Erro ao buscar total de votos do usuário para a semana: " + error.message);
                     }
                 });
         } else {
-            //TODO: Verificar se existe um token no Cookie para chamar o habdleRefreshToken, caso contrário, setar availableVotes para 5
             setAvailableVotes(0);
-            // handleRefreshToken();
         }
-    }, [authenticated]);
+
+        return () => {
+            isMounted = false;
+            controller.abort();
+        }
+    }, [authenticated, handleRefreshToken, apiPrivate]);
 
     const handleVote = (vote: Vote) => {
         if (availableVotes > 0) {
-            api.post('/votes', {
+            apiPrivate.post('/votes', {
                 altcoinId: vote.altcoin.id,
             }).then(response => {
                 if (response.status !== 201) {

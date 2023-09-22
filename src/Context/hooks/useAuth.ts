@@ -1,38 +1,39 @@
 import { useEffect, useState } from "react";
-import { api } from "../../services/api";
 import { AxiosError } from "axios";
+import Cookies from "js-cookie";
+// import { apiPrivate } from "../../services/api";
+import { useApiPrivate } from "./useApiPrivate";
 
 export function useAuth() {
     const [ authenticated, setAuthenticated ] = useState(false);
     const [ loading, setLoading ] = useState(true);
     const [ error, setError ] = useState<string | undefined>(undefined);
+    const apiPrivate = useApiPrivate();
+
     //TODO: Refactor to remove error and use toast instead
-    // use a custom hook to handle errors
 
     useEffect(() => {
         const token = localStorage.getItem("token");
 
         if (token) {
-            api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+            apiPrivate.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
             setAuthenticated(true);
         }
 
         setLoading(false);
-    }, []);
+    }, [setAuthenticated, apiPrivate]);
 
     async function handleLogin(email: string, password: string) {
         try {
-            const response = await api.post('auth/login', {
+            const response = await apiPrivate.post('auth/login', {
                 email,
                 password,
             });
             
             const { token } = response.data;
-            // TODO: adicionar o token da resposta no cookie do navegador
-            // Cookies.set('refreshToken', response.headers['refreshToken'], { expires: refreshToken.sign.expiresIn });
     
             localStorage.setItem("token", JSON.stringify(token));
-            api.defaults.headers.Authorization = `Bearer ${token}`;
+            apiPrivate.defaults.headers.Authorization = `Bearer ${token}`;
             setAuthenticated(true);
             setError(undefined);
         } catch (error) {
@@ -47,38 +48,40 @@ export function useAuth() {
         }
     }
 
-    // async function handleRefreshToken() {
-    //     //get token from Cookies
-    //     const token = Cookies.get('refreshToken');
-    //     if (!token) {
-    //         return;
-    //     }
-    //     api.defaults.headers.Authorization = `Bearer ${token}`;
+    async function handleRefreshToken() {
+        const token = Cookies.get('refreshToken');
         
+        if (!token) {
+            return;
+        }
 
-    //     api.post('auth/refresh-token', {
-    //         token,
-    //     }).then(response => {
-    //         if (response.status !== 200) {
-    //             console.log(response);
-    //             return;
-    //         }
+        apiPrivate.defaults.headers.Authorization = `Bearer ${token}`;
+        
+        apiPrivate.patch('auth/refresh', {
+            token,
+        })
+            .then(response => {
+                if (response.status !== 200) {
+                    console.log(response);
+                    return;
+                }
 
-    //         setAuthenticated(true);
-    //         const { token } = response.data;
-    //         // Cookies.set('refreshToken', response.headers['refreshToken'], { expires: refreshToken.sign.expiresIn }); //TODO: Check expiration time
+                setAuthenticated(true);
+                const { token } = response.data;
 
-    //         localStorage.setItem("token", JSON.stringify(token));
-    //         api.defaults.headers.Authorization = `Bearer ${token}`;
-    //     });
-    // }
-
+                localStorage.setItem("token", JSON.stringify(token));
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 
     function handleLogout() {
         setAuthenticated(false);
         localStorage.removeItem("token");
-        delete api.defaults.headers.Authorization;
+        delete apiPrivate.defaults.headers.Authorization;
+        Cookies.remove('refreshToken');
     }
 
-    return { authenticated, setAuthenticated, loading, error, handleLogin, handleLogout };
+    return { authenticated, setAuthenticated, loading, error, handleLogin, handleRefreshToken, handleLogout };
 }

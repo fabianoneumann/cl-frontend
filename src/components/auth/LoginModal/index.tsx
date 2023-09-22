@@ -43,8 +43,6 @@ export function LoginModal({
     const navigate = useNavigate();
 
     async function authenticateUser({ email, password }: LoginFormData) {
-        //TODO: CHECK ACTIVATION STATUS AND REDIRECT TO ACTIVATE YOUR ACCOUNT PAGE IF NOT ACTIVATED
-        //TODO: CHECK IF IT'S POSSIBLE TO USE ERROR FROM CONTEXT WITHOU LOGIN ERROR - TRY CATCH?
         try {
             await handleLogin(email, password);
 
