@@ -6,6 +6,7 @@ import { api } from "../../services/api";
 import { AuthContext } from "../../Context/AuthContext";
 import { isValidToken } from "../../utils/auth/is-valid-token";
 import { useApiPrivate } from "../../Context/hooks/useApiPrivate";
+import toast from "react-hot-toast";
 
 interface Vote {
     altcoin: {
@@ -28,6 +29,8 @@ export function VotesToStudy() {
 
     const { authenticated, handleRefreshToken } = useContext(AuthContext);
     const apiPrivate = useApiPrivate();
+
+    
 
     useEffect(() => {
         api.get('/votes/counters')
@@ -61,7 +64,7 @@ export function VotesToStudy() {
                     if (error.response && error.response.status === 401) {
                         handleRefreshToken();
                     } else if (error.message === 'canceled' || error.message === 'aborted') {
-                        console.log(''); //TODO: Check if this is improvable
+                        // Do nothing - TODO: Check if this is improvable
                     } else {
                         throw new Error("Erro ao buscar total de votos do usuário para a semana: " + error.message);
                     }
@@ -82,7 +85,7 @@ export function VotesToStudy() {
                 altcoinId: vote.altcoin.id,
             }).then(response => {
                 if (response.status !== 201) {
-                    alert('Erro ao computar voto!');
+                    toast.error('Erro ao computar voto!');
                     return;
                 }
 
@@ -112,12 +115,12 @@ export function VotesToStudy() {
                 });
                 setFetchedVotes(updatedVoteList);
 
-                alert('Voto computado com sucesso!');
+                toast.success('Voto computado com sucesso!');
             }).catch(error => {
-                alert('Erro ao computar voto: ' + error.message);
+                toast.error('Erro ao computar voto: ' + error.message);
             });
         } else if (availableVotes === 0) {
-            alert('Você não tem mais votos disponíveis!');
+            toast.error('Você não tem mais votos disponíveis!');
         }
     }
 
@@ -170,14 +173,14 @@ export function VotesToStudy() {
 
                                     <td>{ authenticated 
                                         ? <button onClick={() => handleVote(vote)}>Votar</button>
-                                        : <button onClick={() => alert('Conecte-se para votar')}>Votar</button>
+                                        : <button onClick={() => toast.error('Conecte-se para votar')}>Votar</button>
                                     }</td>          
                                 </tr>
                             ))}                            
                         </tbody>
                     </VotesTable>
                     <TableFooterText>
-                        Lista com as 20 altcoins mais votadas para estudo na semana. 
+                        Lista com as 20 altcoins mais votadas para estudo na semana, além do BTC e do ETH. 
                         Utilize o campo de busca para visualizar e votar em outras altcoins.
                         Caso não encontre, entre em contato para solicitar a inclusão do ativo na lista.
                     </TableFooterText>

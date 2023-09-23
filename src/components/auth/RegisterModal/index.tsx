@@ -6,6 +6,7 @@ import { LoginSection, RegisterForm, RegisterModalBackground, RegisterModalConta
 import { Form } from '../../Form';
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../services/api";
+import toast from "react-hot-toast";
 
 interface RegisterModalProps {
     isRegisterModalOpen: boolean;
@@ -51,7 +52,7 @@ export function RegisterModal({
             password,
         }).then(response => {
             if (response.status !== 201) {
-                alert('Erro ao registrar usuário!');
+                toast.error('Erro ao registrar usuário!');
                 return;
             }
 

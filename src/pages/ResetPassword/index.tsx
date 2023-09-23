@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Form } from "../../components/Form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
+import toast from "react-hot-toast";
 
 const resetPasswordFormSchema = z.object({
     password: z.string()
@@ -49,16 +50,16 @@ export function ResetPassword() {
         })
             .then(response => {
                 if (response.status !== 204) {
-                    alert('Erro no reset de senha! Tente mais tarde.');
+                    toast.error('Erro no reset de senha! Tente mais tarde.');
                     return;
                 }
                 
                 //TODO: Adicionar mensagem de sucesso em toast e
                 // adicionar timer com ícone em movimento ou alguma animação para sucesso
-                alert('Senha alterada com sucesso!');
+                toast.success('Senha alterada com sucesso!');
                 navigate('/');
             }).catch(error => {
-                alert('Erro ao ativar conta: ' + error.message);
+                toast.error('Erro ao ativar conta: ' + error.message);
             });
     
         reset({password: '', passwordConfirmation: ''});

@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ResetPasswordForm, ResetPasswordModalBackground, ResetPasswordModalContainer } from "./styles";
 import { Form } from "../../Form";
 import { api } from "../../../services/api";
+import toast from "react-hot-toast";
 
 interface ResetPasswordModalProps {
     isResetPasswordModalOpen: boolean;
@@ -40,14 +41,14 @@ export function ResetPasswordModal({
             console.log(response.data);
             
             if (response.status !== 204) {
-                alert('Erro ao solicitar redefinição de senha!');
+                toast.error('Erro ao solicitar redefinição de senha!');
                 return;
             }
 
-            alert('E-mail de redefinição de senha enviado com sucesso!');
+            toast.success('E-mail de redefinição de senha enviado com sucesso!');
             setResetPasswordModalOpen(false);
         }).catch(error => {
-            alert('Erro ao solicitar redefinição de senha: ' + error.response.data.message);
+            toast.error('Erro ao solicitar redefinição de senha: ' + error.response.data.message);
         });
 
         reset({email: ''});

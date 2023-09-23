@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AccountActivationContainer, AccountActivationSubtitle, AccountActivationTitle } from "./styles";
 import { api } from "../../services/api";
 import { AuthContext } from "../../Context/AuthContext";
+import toast from "react-hot-toast";
 
 export function AccountActivation() {
     //TODO:
@@ -29,7 +30,7 @@ export function AccountActivation() {
             api.get('/users/activate')
                 .then(response => {
                     if (response.status !== 204) {
-                        alert('Erro ao ativar conta!');
+                        toast.error('Erro ao ativar conta!');
                         return;
                     }
 
@@ -38,7 +39,7 @@ export function AccountActivation() {
 
                     setAccountActivated(true);
                 }).catch(() => {
-                    alert('Seu link de ativação expirou! Por favor, tente se conectar para receber um novo link de ativação.');
+                    toast.error('Seu link de ativação expirou! Por favor, tente se conectar para receber um novo link de ativação.');
                     navigate('/');
                 });
         }, 2000);
