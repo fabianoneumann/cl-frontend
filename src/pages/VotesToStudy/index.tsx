@@ -37,12 +37,24 @@ export function VotesToStudy() {
                 const { voteCounters } = response.data;
                 totalVotesRef.current = voteCounters.totalCount;
                 weeklyVotesRef.current = voteCounters.weekCount;
+            }).catch(error => {
+                if (error instanceof AxiosError) {
+                    if (error.message === "Network Error") {
+                        toast.error('Erro ao buscar os contadores de votos! Tente novamente mais tarde.');
+                    }
+                }
             });
 
         api.get('votes/current-week')
             .then(response => {
                 setFetchedVotes(response.data.votes);
                 setVotes(response.data.votes);
+            }).catch(error => {
+                if (error instanceof AxiosError) {
+                    if (error.message === "Network Error") {
+                        toast.error('Erro ao buscar os votos da semana! Tente novamente mais tarde.');
+                    }
+                }
             });
         
     }, []);
@@ -61,11 +73,19 @@ export function VotesToStudy() {
                     isMounted && setAvailableVotes(5 - response.data.votesCount);
                 }).catch(error => {
                     if (error.response && error.response.status === 401) {
+                        //TODO: Check if this is necessary since i already have an interceptor:
                         handleRefreshToken();
                     } else if (error.message === 'canceled' || error.message === 'aborted') {
                         // Do nothing - TODO: Check if this is improvable
+                    } else if (error instanceof AxiosError) {
+                        if (error.message === "Network Error") {
+                            toast.error('Erro ao computar voto! Tente novamente mais tarde.');
+                        } else {
+                            const message = error.response?.data.message;
+                            toast.error('Erro ao computar voto: ' + message);
+                        }
                     } else {
-                        throw new Error("Erro ao buscar total de votos do usuário para a semana: " + error.message);
+                        toast.error('Erro ao buscar total de votos do usuário para a semana: ' + error.message);
                     }
                 });
         } else {
