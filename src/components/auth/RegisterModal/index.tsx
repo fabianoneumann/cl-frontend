@@ -7,6 +7,7 @@ import { Form } from '../../Form';
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../services/api";
 import toast from "react-hot-toast";
+import { AxiosError } from 'axios';
 
 interface RegisterModalProps {
     isRegisterModalOpen: boolean;
@@ -61,7 +62,16 @@ export function RegisterModal({
             reset({username: '', email: '', password: ''});
             navigate('/users/activate-your-account');
         }).catch(error => {
-            setError(error.response.data.message);
+            if (error instanceof AxiosError) {
+                if (error.message === "Network Error") {
+                    setError("Erro ao registrar! Tente novamente mais tarde.");
+                } else {
+                    const message = error.response?.data.message;
+                    setError("Erro ao registrar: " + message);
+                }
+            } else {
+                setError("Erro ao registrar: " + error.message);
+            }
         });
     }
 

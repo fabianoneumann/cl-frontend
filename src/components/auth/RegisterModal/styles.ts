@@ -32,7 +32,7 @@ export const RegisterForm = styled.form`
 
     span {
         color: ${props => props.theme["red-300"]};
-        align-self: center;
+        text-align: center;
         max-width: 18rem;
     }
 

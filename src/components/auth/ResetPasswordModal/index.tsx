@@ -6,6 +6,7 @@ import { ResetPasswordForm, ResetPasswordModalBackground, ResetPasswordModalCont
 import { Form } from "../../Form";
 import { api } from "../../../services/api";
 import toast from "react-hot-toast";
+import { AxiosError } from "axios";
 
 interface ResetPasswordModalProps {
     isResetPasswordModalOpen: boolean;
@@ -47,11 +48,19 @@ export function ResetPasswordModal({
 
             toast.success('E-mail de redefinição de senha enviado com sucesso!');
             setResetPasswordModalOpen(false);
+            reset({email: ''});
         }).catch(error => {
-            toast.error('Erro ao solicitar redefinição de senha: ' + error.response.data.message);
+            if (error instanceof AxiosError) {
+                if (error.message === "Network Error") {
+                    toast.error('Erro ao solicitar redefinição de senha! Tente novamente mais tarde.');
+                } else {
+                    const message = error.response?.data.message;
+                    toast.error('Erro ao solicitar redefinição de senha: ' + message);
+                }
+            } else {
+                toast.error('Erro ao solicitar redefinição de senha: ', error.message);
+            }
         });
-
-        reset({email: ''});
     }
 
     useEffect(() => {

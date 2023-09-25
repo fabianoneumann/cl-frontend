@@ -38,12 +38,17 @@ export function useAuth() {
             setError(undefined);
         } catch (error) {
             if (error instanceof AxiosError) {
-                const message = error.response?.data.message;
-                setError(message || "Erro ao fazer login");
-                throw new Error(message || "Erro ao fazer login");
+                if (error.message === "Network Error") {
+                    setError("Erro ao fazer login! Tente novamente mais tarde.");
+                    throw new Error();
+                } else {
+                    const message = error.response?.data.message;
+                    setError("Erro ao fazer login: " + message);
+                    throw new Error();
+                }                
             } else {
-                setError("Erro ao fazer login");
-                throw new Error("Erro ao fazer login");
+                setError("Erro ao fazer login! Tente novamente mais tarde.");
+                throw new Error();
             }
         }
     }

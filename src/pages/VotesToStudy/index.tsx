@@ -7,6 +7,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import { isValidToken } from "../../utils/auth/is-valid-token";
 import { useApiPrivate } from "../../Context/hooks/useApiPrivate";
 import toast from "react-hot-toast";
+import { AxiosError } from "axios";
 
 interface Vote {
     altcoin: {
@@ -29,8 +30,6 @@ export function VotesToStudy() {
 
     const { authenticated, handleRefreshToken } = useContext(AuthContext);
     const apiPrivate = useApiPrivate();
-
-    
 
     useEffect(() => {
         api.get('/votes/counters')
@@ -117,7 +116,16 @@ export function VotesToStudy() {
 
                 toast.success('Voto computado com sucesso!');
             }).catch(error => {
-                toast.error('Erro ao computar voto: ' + error.message);
+                if (error instanceof AxiosError) {
+                    if (error.message === "Network Error") {
+                        toast.error('Erro ao computar voto! Tente novamente mais tarde.');
+                    } else {
+                        const message = error.response?.data.message;
+                        toast.error('Erro ao computar voto: ' + message);
+                    }
+                } else {
+                    toast.error('Erro ao computar voto: ' + error.message);
+                }
             });
         } else if (availableVotes === 0) {
             toast.error('Você não tem mais votos disponíveis!');
